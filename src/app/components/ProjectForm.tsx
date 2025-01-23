@@ -2,7 +2,21 @@
 
 import { useState } from 'react';
 
-const ProjectForm = () => {
+interface Project {
+  _id: string; // Add unique ID field
+  name: string;
+  description: string;
+  technologies: string[];
+  liveUrl: string;
+  repoUrl: string;
+  imageUrl: string;
+}
+
+interface ProjectFormProps {
+  onProjectAdded: (project: Project) => void; // Callback to update the project list
+}
+
+const ProjectForm: React.FC<ProjectFormProps> = ({ onProjectAdded }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [technologies, setTechnologies] = useState('');
@@ -12,6 +26,7 @@ const ProjectForm = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [fileInputKey, setFileInputKey] = useState(Date.now()); // Add a key to reset file input
 
   // Handle image upload
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +65,6 @@ const ProjectForm = () => {
 
       if (uploadData.secure_url) {
         setImageUrl(uploadData.secure_url); // Set the image URL
-        alert('Image uploaded successfully!');
       } else {
         alert('Image upload failed.');
       }
@@ -61,6 +75,8 @@ const ProjectForm = () => {
       setIsUploading(false);
     }
   };
+
+  const generateUniqueId = () => '_' + Math.random().toString(36).substr(2, 9);
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
@@ -76,6 +92,7 @@ const ProjectForm = () => {
     }
 
     const projectData = {
+      _id: generateUniqueId(),
       name,
       description,
       technologies: technologies.split(',').map((tech) => tech.trim()),
@@ -103,7 +120,8 @@ const ProjectForm = () => {
         setLiveUrl('');
         setRepoUrl('');
         setImageUrl('');
-        alert('Project added successfully!');
+        setFileInputKey(Date.now()); // Reset file input by changing its key
+        onProjectAdded(projectData); // Add the project to the state in ProjectGrid
       } else {
         setError('Failed to add the project. Please try again.');
       }
@@ -176,6 +194,7 @@ const ProjectForm = () => {
             type="file"
             accept="image/jpeg, image/png, image/webp" // Restrict file types
             onChange={handleImageUpload}
+            key={fileInputKey} // Add key to reset file input
             className="w-full p-2 border border-gray-300 rounded mt-1"
           />
           {isUploading && <p className="text-blue-500 text-sm">Uploading...</p>}
@@ -194,7 +213,7 @@ const ProjectForm = () => {
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || isUploading} // Disable button while uploading
           className="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-400"
         >
           {isSubmitting ? 'Submitting...' : 'Add Project'}

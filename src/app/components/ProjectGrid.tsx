@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import ProjectCard from './ProjectCard';
+import ProjectForm from './ProjectForm';
 
 interface Project {
+  _id: string; // Add unique ID field
   name: string;
   description: string;
   technologies: string[];
@@ -31,13 +33,19 @@ export default function ProjectGrid() {
     fetchProjects();
   }, []);
 
+  // Function to add a new project to the list
+  const handleProjectAdded = (newProject: Project) => {
+    setProjects((prevProjects) => [newProject, ...prevProjects]);
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-4">
       <h1 className="text-3xl font-bold text-center mb-8">My Projects</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <ProjectForm onProjectAdded={handleProjectAdded} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
         {projects.map((project) => (
           <ProjectCard
-            key={project.name}
+            key={project._id} // Use unique ID as key
             project={project}
           />
         ))}
