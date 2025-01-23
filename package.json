@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "cloudinary": "^2.5.1",
     "dotenv": "^16.4.7",
     "mongodb": "^6.12.0",
     "next": "15.1.5",

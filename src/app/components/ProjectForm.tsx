@@ -9,13 +9,71 @@ const ProjectForm = () => {
   const [liveUrl, setLiveUrl] = useState('');
   const [repoUrl, setRepoUrl] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [isUploading, setIsUploading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
 
+  // Handle image upload
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      return;
+    }
+
+    const file = e.target.files[0];
+    const fileSizeMB = file.size / (1024 * 1024); // Convert size to MB
+
+    // Validation for file size and type
+    if (fileSizeMB > 15) {
+      alert('File size exceeds 15MB. Please upload a smaller image.');
+      return;
+    }
+
+    const formData = new FormData();
+    setIsUploading(true);
+
+    try {
+      // Fetch Cloudinary upload URL and preset
+      const response = await fetch('/api/upload-url');
+      const { url, uploadPreset } = await response.json();
+
+      // Append file and preset to FormData
+      formData.append('file', file);
+      formData.append('upload_preset', uploadPreset);
+
+      // Upload to Cloudinary
+      const uploadResponse = await fetch(url, {
+        method: 'POST',
+        body: formData
+      });
+
+      const uploadData = await uploadResponse.json();
+
+      if (uploadData.secure_url) {
+        setImageUrl(uploadData.secure_url); // Set the image URL
+        alert('Image uploaded successfully!');
+      } else {
+        alert('Image upload failed.');
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      alert('An error occurred while uploading the image.');
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError('');
+
+    // Check if image upload was successful
+    if (!imageUrl) {
+      setError('Please upload an image before submitting the form.');
+      setIsSubmitting(false);
+      return;
+    }
 
     const projectData = {
       name,
@@ -113,17 +171,27 @@ const ProjectForm = () => {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium">Image URL</label>
+          <label className="block text-sm font-medium">Upload Image</label>
           <input
-            type="url"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
+            type="file"
+            accept="image/jpeg, image/png, image/webp" // Restrict file types
+            onChange={handleImageUpload}
             className="w-full p-2 border border-gray-300 rounded mt-1"
           />
+          {isUploading && <p className="text-blue-500 text-sm">Uploading...</p>}
+          {imageUrl && (
+            <div className="mt-2">
+              <p className="text-green-600 text-sm">Image uploaded:</p>
+              <img
+                src={imageUrl}
+                alt="Uploaded preview"
+                className="mt-2 w-32 h-32 object-cover border"
+              />
+            </div>
+          )}
         </div>
 
         {error && <p className="text-red-500 text-sm">{error}</p>}
-
         <button
           type="submit"
           disabled={isSubmitting}
