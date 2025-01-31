@@ -9,13 +9,47 @@ interface Project {
   liveUrl: string;
   repoUrl: string;
   imageUrl: string;
+  _id: string; // Add project ID
 }
 
 interface ProjectCardProps {
   project: Project;
+  onProjectDeleted: (projectId: string) => void; // Add delete handler prop
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({
+  project,
+  onProjectDeleted
+}) => {
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`/api/projects?projectId=${project._id}`, {
+        method: 'DELETE'
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        onProjectDeleted(project._id); // Call the delete handler
+
+        // Archive the image in Cloudinary
+        if (project.imageUrl) {
+          const imageName = project.imageUrl.split('/').pop()?.split('.')[0];
+          if (imageName) {
+            await fetch(`/api/upload-url?imageName=${imageName}`, {
+              method: 'POST'
+            });
+          }
+        }
+      } else {
+        alert('Failed to delete the project. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error deleting project:', error);
+      alert('An error occurred while deleting the project.');
+    }
+  };
+
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white hover:shadow-2xl transition duration-300">
       {project.imageUrl && (
@@ -52,6 +86,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               View Repo
             </a>
           )}
+          <button
+            onClick={handleDelete}
+            className="text-red-500 hover:underline"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>

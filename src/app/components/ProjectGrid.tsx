@@ -38,6 +38,14 @@ export default function ProjectGrid() {
     setProjects((prevProjects) => [newProject, ...prevProjects]);
   };
 
+  // Function to delete a project from the list
+  const handleProjectDeleted = (projectId: string) => {
+    setProjects((prevProjects) =>
+      prevProjects.filter((project) => project._id !== projectId)
+    );
+    alert('Project deleted successfully!');
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-4">
       <h1 className="text-3xl font-bold text-center mb-8">My Projects</h1>
@@ -47,6 +55,7 @@ export default function ProjectGrid() {
           <ProjectCard
             key={project._id} // Use unique ID as key
             project={project}
+            onProjectDeleted={handleProjectDeleted} // Pass the delete handler
           />
         ))}
       </div>
