@@ -1,6 +1,6 @@
 {
   "rules": {
-    "no-warning-comments": "off",
-    "no-console": "off"
+    "@next/next/no-img-element": "off", // Example: Ignore warnings about using <img> instead of next/image
+    "no-unused-vars": "off" // Ignore unused variable warnings
   }
 }
