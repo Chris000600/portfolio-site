@@ -1,6 +1,7 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
+import ProjectEditForm from './ProjectEditForm';
 
 interface Project {
   name: string;
@@ -14,13 +15,17 @@ interface Project {
 
 interface ProjectCardProps {
   project: Project;
+  onUpdate: (updatedProject: Project) => void;
   onProjectDeleted: (projectId: string) => void; // Add delete handler prop
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
+  onUpdate,
   onProjectDeleted
 }) => {
+  const [isEditing, setIsEditing] = useState(false);
+
   const handleDelete = async () => {
     try {
       const response = await fetch(`/api/projects?projectId=${project._id}`, {
@@ -92,8 +97,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           >
             Delete
           </button>
+          <button
+            onClick={() => setIsEditing(true)}
+            className="text-blue-500 hover:underline"
+          >
+            Edit
+          </button>
         </div>
       </div>
+      {isEditing && (
+        <ProjectEditForm
+          project={project}
+          onClose={() => setIsEditing(false)}
+          onUpdate={onUpdate}
+        />
+      )}
     </div>
   );
 };

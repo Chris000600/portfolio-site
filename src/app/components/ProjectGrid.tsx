@@ -38,6 +38,14 @@ export default function ProjectGrid() {
     setProjects((prevProjects) => [newProject, ...prevProjects]);
   };
 
+  const handleUpdate = (updatedProject: Project) => {
+    setProjects((prevProjects) =>
+      prevProjects.map((project) =>
+        project._id === updatedProject._id ? updatedProject : project
+      )
+    );
+  };
+
   // Function to delete a project from the list
   const handleProjectDeleted = (projectId: string) => {
     setProjects((prevProjects) =>
@@ -55,6 +63,7 @@ export default function ProjectGrid() {
           <ProjectCard
             key={project._id} // Use unique ID as key
             project={project}
+            onUpdate={handleUpdate}
             onProjectDeleted={handleProjectDeleted} // Pass the delete handler
           />
         ))}
