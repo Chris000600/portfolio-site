@@ -1,27 +1,16 @@
 'use client';
 
+import Project from '@/type/project';
 import { useState } from 'react';
-
-interface Project {
-  _id: string;
-  name: string;
-  description: string;
-  technologies: string[];
-  liveUrl: string;
-  repoUrl: string;
-  imageUrl: string;
-}
 
 interface ProjectEditFormProps {
   project: Project;
   onClose: () => void;
-  onUpdate: (updatedProject: Project) => void;
 }
 
 const ProjectEditForm: React.FC<ProjectEditFormProps> = ({
   project,
-  onClose,
-  onUpdate
+  onClose
 }) => {
   const [name, setName] = useState(project.name);
   const [description, setDescription] = useState(project.description);
@@ -59,7 +48,6 @@ const ProjectEditForm: React.FC<ProjectEditFormProps> = ({
       const result = await response.json();
 
       if (result.success) {
-        onUpdate(updatedProject); // Update state in ProjectGrid
         onClose(); // Close the form
       } else {
         setError('Failed to update project. Please try again.');

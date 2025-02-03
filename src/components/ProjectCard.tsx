@@ -2,53 +2,20 @@
 
 import React, { useState } from 'react';
 import ProjectEditForm from './ProjectEditForm';
-
-interface Project {
-  name: string;
-  description: string;
-  technologies: string[];
-  liveUrl: string;
-  repoUrl: string;
-  imageUrl: string;
-  _id: string; // Add project ID
-}
+import Project from '@/type/project';
+import { ObjectId } from 'mongodb';
+import { deleteProject } from '@/lib/projects';
 
 interface ProjectCardProps {
   project: Project;
-  onUpdate: (updatedProject: Project) => void;
-  onProjectDeleted: (projectId: string) => void; // Add delete handler prop
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({
-  project,
-  onUpdate,
-  onProjectDeleted
-}) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`/api/projects?projectId=${project._id}`, {
-        method: 'DELETE'
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        onProjectDeleted(project._id); // Call the delete handler
-
-        // Archive the image in Cloudinary
-        if (project.imageUrl) {
-          const imageName = project.imageUrl.split('/').pop()?.split('.')[0];
-          if (imageName) {
-            await fetch(`/api/upload-url?imageName=${imageName}`, {
-              method: 'POST'
-            });
-          }
-        }
-      } else {
-        alert('Failed to delete the project. Please try again.');
-      }
+      await deleteProject(project._id);
     } catch (error) {
       console.error('Error deleting project:', error);
       alert('An error occurred while deleting the project.');
@@ -109,7 +76,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <ProjectEditForm
           project={project}
           onClose={() => setIsEditing(false)}
-          onUpdate={onUpdate}
         />
       )}
     </div>

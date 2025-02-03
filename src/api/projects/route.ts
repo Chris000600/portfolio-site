@@ -2,17 +2,18 @@ import { NextResponse } from 'next/server';
 import { clientPromise, dbName } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 
+// Access the DB
+const client = await clientPromise;
+const db = client.db(dbName);
+
 export async function GET() {
   try {
-    const client = await clientPromise;
-    const db = client.db(dbName);
-
     const projects = await db.collection('projects').find({}).toArray();
     return NextResponse.json({ success: true, data: projects });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { success: false, error: 'Internal Server Error' },
+      { success: false, error: 'Unable to get projects' },
       { status: 500 }
     );
   }
@@ -22,8 +23,6 @@ export async function POST(req: Request) {
   try {
     const { name, description, technologies, liveUrl, repoUrl, imageUrl } =
       await req.json();
-    const client = await clientPromise;
-    const db = client.db(dbName);
 
     await db.collection('projects').insertOne({
       name,
@@ -54,9 +53,6 @@ export async function DELETE(req: Request) {
         { status: 400 }
       );
     }
-
-    const client = await clientPromise;
-    const db = client.db(dbName);
 
     const project = await db
       .collection('projects')

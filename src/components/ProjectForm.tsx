@@ -1,28 +1,18 @@
 'use client';
 
 import { useState } from 'react';
+import { uploadImage } from '@/lib/cloudinary';
+import { createProject } from '@/lib/projects';
+import { ObjectId } from 'mongodb';
 
-interface Project {
-  _id: string; // Add unique ID field
-  name: string;
-  description: string;
-  technologies: string[];
-  liveUrl: string;
-  repoUrl: string;
-  imageUrl: string;
-}
-
-interface ProjectFormProps {
-  onProjectAdded: (project: Project) => void; // Callback to update the project list
-}
-
-const ProjectForm: React.FC<ProjectFormProps> = ({ onProjectAdded }) => {
+const ProjectForm = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [technologies, setTechnologies] = useState('');
   const [liveUrl, setLiveUrl] = useState('');
   const [repoUrl, setRepoUrl] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+
   const [isUploading, setIsUploading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -43,28 +33,14 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onProjectAdded }) => {
       return;
     }
 
-    const formData = new FormData();
     setIsUploading(true);
 
     try {
-      // Fetch Cloudinary upload URL and preset
-      const response = await fetch('/api/upload-url');
-      const { url, uploadPreset } = await response.json();
+      const response = await uploadImage(file);
+      const secure_img_url = await response.json();
 
-      // Append file and preset to FormData
-      formData.append('file', file);
-      formData.append('upload_preset', uploadPreset);
-
-      // Upload to Cloudinary
-      const uploadResponse = await fetch(url, {
-        method: 'POST',
-        body: formData
-      });
-
-      const uploadData = await uploadResponse.json();
-
-      if (uploadData.secure_url) {
-        setImageUrl(uploadData.secure_url); // Set the image URL
+      if (secure_img_url) {
+        setImageUrl(secure_img_url);
       } else {
         alert('Image upload failed.');
       }
@@ -75,8 +51,6 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onProjectAdded }) => {
       setIsUploading(false);
     }
   };
-
-  const generateUniqueId = () => '_' + Math.random().toString(36).substr(2, 9);
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
@@ -92,7 +66,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onProjectAdded }) => {
     }
 
     const projectData = {
-      _id: generateUniqueId(),
+      _id: new ObjectId(),
       name,
       description,
       technologies: technologies.split(',').map((tech) => tech.trim()),
@@ -102,13 +76,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onProjectAdded }) => {
     };
 
     try {
-      const response = await fetch('/api/projects', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(projectData)
-      });
+      const response = await createProject(projectData);
 
       const result = await response.json();
 
@@ -121,7 +89,6 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onProjectAdded }) => {
         setRepoUrl('');
         setImageUrl('');
         setFileInputKey(Date.now()); // Reset file input by changing its key
-        onProjectAdded(projectData); // Add the project to the state in ProjectGrid
       } else {
         setError('Failed to add the project. Please try again.');
       }
