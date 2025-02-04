@@ -1,14 +1,13 @@
 import ProjectGrid from '@/components/ProjectGrid';
 import classes from './page.module.css';
 import { Suspense } from 'react';
+import { getProjects } from '@/lib/projects';
 
 async function Projects() {
   // this component will be the one that fetches the data instead of the whole page
-  const response = await fetch('/api/projects');
-  const data = await response.json();
-  const projects = data.success ? data.data : [];
+  const response = await getProjects();
 
-  return <ProjectGrid projects={projects} />;
+  return <ProjectGrid projects={JSON.parse(response)} />;
 }
 
 export default function Home() {

@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import ProjectEditForm from './ProjectEditForm';
 import Project from '@/type/project';
-import { ObjectId } from 'mongodb';
 import { deleteProject } from '@/lib/projects';
 
 interface ProjectCardProps {
@@ -15,7 +14,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
   const handleDelete = async () => {
     try {
-      await deleteProject(project._id);
+      await deleteProject(project._id.toString());
     } catch (error) {
       console.error('Error deleting project:', error);
       alert('An error occurred while deleting the project.');
@@ -35,7 +34,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         <h2 className="font-bold text-xl mb-2">{project.name}</h2>
         <p className="text-gray-700 text-base mb-2">{project.description}</p>
         <p className="text-sm text-gray-500 mb-4">
-          <strong>Technologies:</strong> {project.technologies.join(', ')}
+          <strong>Technologies:</strong> {project.technologies}
         </p>
         <div className="flex justify-between items-center">
           {project.liveUrl && (

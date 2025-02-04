@@ -1,3 +1,5 @@
+'use server';
+
 import { NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
 import { revalidatePath } from 'next/cache';
@@ -12,10 +14,12 @@ const publicIdPrefix = 'portfolio-site/';
 const uploadPreset = 'portfolio-site';
 const uploadURL = `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`;
 
-export async function uploadImage(image: File) {
+export async function uploadImage(image: string) {
   const formData = new FormData();
   formData.append('file', image);
   formData.append('upload_preset', uploadPreset);
+
+  console.log('upload img:', formData.get('file'));
 
   try {
     // Upload to Cloudinary
@@ -26,22 +30,13 @@ export async function uploadImage(image: File) {
 
     const uploadData = await uploadResponse.json();
 
-    if (uploadData.secure_url) {
-      return NextResponse.json({
-        success: true,
-        image_url: uploadData.secure_url
-      });
+    if (uploadData) {
+      return uploadData.secure_url;
     } else {
-      return NextResponse.json(
-        { success: false, error: 'Failed to upload image' },
-        { status: 500 }
-      );
+      throw new Error('Failed to upload image');
     }
   } catch (error) {
-    return NextResponse.json(
-      { success: false, error: 'Unable to upload image' },
-      { status: 500 }
-    );
+    throw new Error('Unable to upload image');
   }
 }
 
@@ -57,18 +52,13 @@ export async function deleteImage(imageName: string) {
       console.log('Image deleted successfully:', result);
 
       revalidatePath('/');
-      return NextResponse.json({ success: true });
+
+      return true;
     } else {
       console.log('Failed to delete image:', result);
-      return NextResponse.json(
-        { success: false, error: 'Failed to delete image from DB' },
-        { status: 500 }
-      );
+      throw new Error('Failed to delete image from DB');
     }
   } catch (error) {
-    return NextResponse.json(
-      { success: false, error: 'Unable to delete image' },
-      { status: 500 }
-    );
+    throw new Error('Unable to delete image');
   }
 }

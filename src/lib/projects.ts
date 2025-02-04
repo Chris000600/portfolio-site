@@ -1,88 +1,136 @@
-import { NextResponse } from 'next/server';
+'use server';
+
 import { clientPromise, dbName } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
-import Project from '@/type/project';
-import { deleteImage } from './cloudinary';
+import { deleteImage, uploadImage } from './cloudinary';
 import { revalidatePath } from 'next/cache';
-
-// GET all projects
-export async function getProjects() {
-  const response = await fetch('/api/projects');
-  return response;
-}
 
 // Access the DB
 const client = await clientPromise;
 const db = client.db(dbName);
 
-// CREATE project
-export async function createProject(project: Project) {
+// GET all projects
+export async function getProjects() {
   try {
-    await db.collection('projects').insertOne(project);
-
-    revalidatePath('/');
-
-    return NextResponse.json({ success: true });
+    const projects = await db.collection('projects').find({}).toArray();
+    return JSON.stringify(projects);
   } catch (error) {
     console.error(error);
 
-    return NextResponse.json(
-      { success: false, error: 'Failed to create project' },
-      { status: 500 }
-    );
+    throw new Error('Unable to get projects');
   }
 }
 
+// CREATE project
+export async function createProject(prevState, formData) {
+  try {
+    const project = {
+      name: formData.get('name'),
+      description: formData.get('description'),
+      technologies: formData.get('technologies'),
+      liveUrl: formData.get('liveUrl'),
+      repoUrl: formData.get('repoUrl'),
+      imageUrl: formData.get('imageUrl')
+    };
+
+    const response = await uploadImage(project.imageUrl);
+
+    await db.collection('projects').insertOne({
+      ...project,
+      imageUrl: response
+    });
+
+    revalidatePath('/');
+
+    return true;
+  } catch (error) {
+    console.error(error);
+
+    throw new Error('Failed to create project');
+  }
+}
+
+export async function updateProject(prevState, formData) {
+  console.log('formData:', formData);
+  const project = {
+    _id: formData.get('_id'),
+    name: formData.get('name'),
+    description: formData.get('description'),
+    technologies: formData.get('technologies'),
+    liveUrl: formData.get('liveUrl'),
+    repoUrl: formData.get('repoUrl'),
+    imageUrl: formData.get('imageUrl')
+  };
+
+  console.log('project:', project._id);
+
+  if (!project._id) {
+    throw new Error('Project ID is required');
+  }
+
+  const updatedProject = await db.collection('projects').updateOne(
+    { _id: new ObjectId(project._id) }, // Find project by ID
+    {
+      $set: {
+        name: project.name,
+        description: project.description,
+        technologies: project.technologies,
+        liveUrl: project.liveUrl,
+        repoUrl: project.repoUrl,
+        imageUrl: project.imageUrl
+      }
+    }
+  );
+
+  console.log('updatedProject:', updatedProject);
+
+  if (updatedProject.matchedCount === 0) {
+    throw new Error('Project not found');
+  }
+
+  revalidatePath('/');
+
+  return true;
+}
+
 // DELETE project
-export async function deleteProject(projectId: ObjectId) {
+export async function deleteProject(projectId: string) {
   try {
     // make sure project ID is valid
+    console.log('projectId:', projectId);
     if (!projectId || !ObjectId.isValid(projectId)) {
-      return NextResponse.json(
-        { success: false, error: 'Invalid Project ID' },
-        { status: 400 }
-      );
+      throw new Error('Invalid project ID');
     }
 
+    const objectId = new ObjectId(projectId);
+
     // make sure project exists
-    const project = await db.collection('projects').findOne({ _id: projectId });
+    const project = await db.collection('projects').findOne({ _id: objectId });
+    console.log('project:', project);
     if (!project) {
-      return NextResponse.json(
-        { success: false, error: 'Project not found' },
-        { status: 404 }
-      );
+      throw new Error('Project not found');
     }
 
     // delete project
-    const result = await db
-      .collection('projects')
-      .deleteOne({ _id: projectId });
+    const result = await db.collection('projects').deleteOne({ _id: objectId });
 
     if (result.deletedCount === 1) {
+      console.log('Project deleted successfully:', result);
       // Delete the image from Cloudinary
       const imageName = project.imageUrl.split('/').pop()?.split('.')[0];
 
       if (imageName) {
-        deleteImage(imageName);
-      } else {
-        return NextResponse.json(
-          { success: false, error: 'Image name invalid' },
-          { status: 404 }
-        );
-      }
+        await deleteImage(imageName);
 
-      return NextResponse.json({ success: true });
+        return true;
+      } else {
+        throw new Error('Image name invalid');
+      }
     } else {
-      return NextResponse.json(
-        { success: false, error: 'Failed to delete project from DB' },
-        { status: 404 }
-      );
+      throw new Error('Failed to delete project from DB');
     }
   } catch (error) {
     console.error(error);
-    return NextResponse.json(
-      { success: false, error: 'Failed to delete project' },
-      { status: 500 }
-    );
+    throw new Error('Failed to delete project');
   }
 }

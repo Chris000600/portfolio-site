@@ -1,7 +1,8 @@
 'use client';
 
 import Project from '@/type/project';
-import { useState } from 'react';
+import { useActionState, useEffect, useState } from 'react';
+import { updateProject } from '@/lib/projects';
 
 interface ProjectEditFormProps {
   project: Project;
@@ -12,67 +13,53 @@ const ProjectEditForm: React.FC<ProjectEditFormProps> = ({
   project,
   onClose
 }) => {
-  const [name, setName] = useState(project.name);
-  const [description, setDescription] = useState(project.description);
-  const [technologies, setTechnologies] = useState(
-    project.technologies.join(', ')
-  );
-  const [liveUrl, setLiveUrl] = useState(project.liveUrl);
-  const [repoUrl, setRepoUrl] = useState(project.repoUrl);
-  const [imageUrl, setImageUrl] = useState(project.imageUrl);
+  console.log('prj:', project);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
+  const [state, formAction, isPending] = useActionState(updateProject, {
+    _id: project._id,
+    name: project.name,
+    description: project.description,
+    technologies: project.technologies,
+    liveUrl: project.liveUrl,
+    repoUrl: project.repoUrl,
+    imageUrl: project.imageUrl
+  });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError('');
-
-    const updatedProject: Project = {
-      ...project,
-      name,
-      description,
-      technologies: technologies.split(',').map((tech) => tech.trim()),
-      liveUrl,
-      repoUrl,
-      imageUrl
-    };
-
-    try {
-      const response = await fetch(`/api/projects/${project._id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedProject)
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        onClose(); // Close the form
-      } else {
-        setError('Failed to update project. Please try again.');
-      }
-    } catch (error) {
-      setError('An error occurred while updating the project.');
-    } finally {
-      setIsSubmitting(false);
+  useEffect(() => {
+    console.log('isPending:', isPending);
+    if (isPending) {
+      setIsSubmitting(true);
     }
-  };
+    // logic gate to close the form when the project is updated
+    if (isSubmitting && !isPending) {
+      onClose();
+    }
+  }, [isPending]);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-6 rounded-lg shadow-md w-96">
         <h2 className="text-xl font-semibold mb-4">Edit Project</h2>
         <form
-          onSubmit={handleSubmit}
+          action={formAction}
           className="space-y-4"
         >
           <div>
             <label className="block text-sm font-medium">Project Name</label>
             <input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              id="_id"
+              name="_id"
+              defaultValue={state._id}
+              required
+              hidden
+              className="w-full p-2 border border-gray-300 rounded mt-1"
+            />
+            <input
+              type="text"
+              id="name"
+              name="name"
+              defaultValue={state.name}
               required
               className="w-full p-2 border border-gray-300 rounded mt-1"
             />
@@ -80,8 +67,9 @@ const ProjectEditForm: React.FC<ProjectEditFormProps> = ({
           <div>
             <label className="block text-sm font-medium">Description</label>
             <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              id="description"
+              name="description"
+              defaultValue={state.description}
               required
               rows={3}
               className="w-full p-2 border border-gray-300 rounded mt-1"
@@ -91,8 +79,9 @@ const ProjectEditForm: React.FC<ProjectEditFormProps> = ({
             <label className="block text-sm font-medium">Technologies</label>
             <input
               type="text"
-              value={technologies}
-              onChange={(e) => setTechnologies(e.target.value)}
+              id="technologies"
+              name="technologies"
+              defaultValue={state.technologies}
               required
               placeholder="Comma-separated (e.g., Next.js, MongoDB)"
               className="w-full p-2 border border-gray-300 rounded mt-1"
@@ -102,8 +91,9 @@ const ProjectEditForm: React.FC<ProjectEditFormProps> = ({
             <label className="block text-sm font-medium">Live URL</label>
             <input
               type="url"
-              value={liveUrl}
-              onChange={(e) => setLiveUrl(e.target.value)}
+              id="liveUrl"
+              name="liveUrl"
+              defaultValue={state.liveUrl}
               className="w-full p-2 border border-gray-300 rounded mt-1"
             />
           </div>
@@ -111,8 +101,9 @@ const ProjectEditForm: React.FC<ProjectEditFormProps> = ({
             <label className="block text-sm font-medium">Repository URL</label>
             <input
               type="url"
-              value={repoUrl}
-              onChange={(e) => setRepoUrl(e.target.value)}
+              id="repoUrl"
+              name="repoUrl"
+              defaultValue={state.repoUrl}
               className="w-full p-2 border border-gray-300 rounded mt-1"
             />
           </div>
@@ -120,12 +111,15 @@ const ProjectEditForm: React.FC<ProjectEditFormProps> = ({
             <label className="block text-sm font-medium">Image URL</label>
             <input
               type="url"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
+              id="imageUrl"
+              name="imageUrl"
+              defaultValue={state.imageUrl}
               className="w-full p-2 border border-gray-300 rounded mt-1"
             />
           </div>
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {state.message && (
+            <p className="text-red-500 text-sm">{state.message}</p>
+          )}
           <div className="flex justify-between">
             <button
               type="button"
@@ -136,10 +130,10 @@ const ProjectEditForm: React.FC<ProjectEditFormProps> = ({
             </button>
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isPending}
               className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-400"
             >
-              {isSubmitting ? 'Saving...' : 'Save Changes'}
+              {isPending ? 'Saving...' : 'Save Changes'}
             </button>
           </div>
         </form>
