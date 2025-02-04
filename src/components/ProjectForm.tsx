@@ -1,9 +1,11 @@
 'use client';
 
+import { createProject } from '@/lib/projects';
+import { ObjectId } from 'mongodb';
 import { useState } from 'react';
 
 interface Project {
-  _id: string; // Add unique ID field
+  _id: ObjectId; // Add unique ID field
   name: string;
   description: string;
   technologies: string[];
@@ -76,8 +78,6 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onProjectAdded }) => {
     }
   };
 
-  const generateUniqueId = () => '_' + Math.random().toString(36).substr(2, 9);
-
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,7 +92,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onProjectAdded }) => {
     }
 
     const projectData = {
-      _id: generateUniqueId(),
+      _id: null,
       name,
       description,
       technologies: technologies.split(',').map((tech) => tech.trim()),
@@ -102,6 +102,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onProjectAdded }) => {
     };
 
     try {
+      // const result = await createProject(projectData);
       const response = await fetch('/api/projects', {
         method: 'POST',
         headers: {
@@ -112,8 +113,11 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onProjectAdded }) => {
 
       const result = await response.json();
 
+      console.log(result.data);
+
       if (result.success) {
         // Reset form on successful submission
+        alert(result.data);
         setName('');
         setDescription('');
         setTechnologies('');

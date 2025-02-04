@@ -2,15 +2,18 @@ import { NextResponse } from 'next/server';
 import { clientPromise, dbName } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 
+const client = await clientPromise;
+const db = client.db(dbName);
+
+// API to fetch projects
 export async function GET() {
   try {
-    const client = await clientPromise;
-    const db = client.db(dbName);
-
     const projects = await db.collection('projects').find({}).toArray();
+
     return NextResponse.json({ success: true, data: projects });
   } catch (error) {
     console.error(error);
+
     return NextResponse.json(
       { success: false, error: 'Internal Server Error' },
       { status: 500 }
@@ -18,14 +21,16 @@ export async function GET() {
   }
 }
 
+// API to create projects
 export async function POST(req: Request) {
   try {
     const { name, description, technologies, liveUrl, repoUrl, imageUrl } =
       await req.json();
-    const client = await clientPromise;
-    const db = client.db(dbName);
+
+    const _id = new ObjectId();
 
     await db.collection('projects').insertOne({
+      _id,
       name,
       description,
       technologies,
@@ -33,9 +38,11 @@ export async function POST(req: Request) {
       repoUrl,
       imageUrl
     });
-    return NextResponse.json({ success: true });
+
+    return NextResponse.json({ success: true, data: _id });
   } catch (error) {
     console.error(error);
+
     return NextResponse.json(
       { success: false, error: 'Internal Server Error' },
       { status: 500 }
@@ -54,9 +61,6 @@ export async function DELETE(req: Request) {
         { status: 400 }
       );
     }
-
-    const client = await clientPromise;
-    const db = client.db(dbName);
 
     const project = await db
       .collection('projects')

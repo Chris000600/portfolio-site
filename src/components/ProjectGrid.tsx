@@ -3,9 +3,11 @@
 import { useEffect, useState } from 'react';
 import ProjectCard from './ProjectCard';
 import ProjectForm from './ProjectForm';
+import { getProjects } from '@/lib/projects';
+import { ObjectId } from 'mongodb';
 
 interface Project {
-  _id: string; // Add unique ID field
+  _id: ObjectId; // Add unique ID field
   name: string;
   description: string;
   technologies: string[];
@@ -20,8 +22,8 @@ export default function ProjectGrid() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch('/api/projects');
-        const data = await response.json();
+        const data = await getProjects();
+
         if (data.success) {
           setProjects(data.data);
         }
@@ -47,7 +49,7 @@ export default function ProjectGrid() {
   };
 
   // Function to delete a project from the list
-  const handleProjectDeleted = (projectId: string) => {
+  const handleProjectDeleted = (projectId: ObjectId) => {
     setProjects((prevProjects) =>
       prevProjects.filter((project) => project._id !== projectId)
     );
@@ -61,7 +63,7 @@ export default function ProjectGrid() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
         {projects.map((project) => (
           <ProjectCard
-            key={project._id} // Use unique ID as key
+            key={project._id?.toString()} // Use unique ID as key
             project={project}
             onUpdate={handleUpdate}
             onProjectDeleted={handleProjectDeleted} // Pass the delete handler

@@ -1,9 +1,10 @@
 'use client';
 
+import { ObjectId } from 'mongodb';
 import { useState } from 'react';
 
 interface Project {
-  _id: string;
+  _id: ObjectId;
   name: string;
   description: string;
   technologies: string[];

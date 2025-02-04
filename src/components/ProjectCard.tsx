@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import ProjectEditForm from './ProjectEditForm';
+import { ObjectId } from 'mongodb';
 
 interface Project {
   name: string;
@@ -10,13 +11,13 @@ interface Project {
   liveUrl: string;
   repoUrl: string;
   imageUrl: string;
-  _id: string; // Add project ID
+  _id: ObjectId; // Add project ID
 }
 
 interface ProjectCardProps {
   project: Project;
   onUpdate: (updatedProject: Project) => void;
-  onProjectDeleted: (projectId: string) => void; // Add delete handler prop
+  onProjectDeleted: (projectId: ObjectId) => void; // Add delete handler prop
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({

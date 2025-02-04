@@ -1,4 +1,4 @@
-import ProjectGrid from './components/ProjectGrid';
+import ProjectGrid from '@/components/ProjectGrid';
 
 export default function Home() {
   return (
