@@ -2,13 +2,15 @@ import ProjectGrid from '@/components/ProjectGrid';
 import classes from './page.module.css';
 import { Suspense } from 'react';
 import { getProjects } from '@/lib/projects';
+import Projects from '@/components/Projects';
 
-async function Projects() {
-  // this component will be the one that fetches the data instead of the whole page
-  const response = await getProjects();
+// async function Projects() {
+//   // this component will be the one that fetches the data instead of the whole page
+//   // advantageous because this is rendered server-side unlike SWR
+//   const response = await getProjects();
 
-  return <ProjectGrid projects={JSON.parse(response)} />;
-}
+//   return <ProjectGrid projects={JSON.parse(response)} />;
+// }
 
 export default function Home() {
   return (

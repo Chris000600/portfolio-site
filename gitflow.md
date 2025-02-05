@@ -15,3 +15,7 @@
 
 - git tag v0.1
 - git push origin --tags
+
+# Remove untracked files
+
+- git clean -fd
