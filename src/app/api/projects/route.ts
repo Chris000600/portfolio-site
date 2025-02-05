@@ -1,4 +1,5 @@
 import { clientPromise, dbName } from '@/lib/mongodb';
+import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
@@ -8,6 +9,8 @@ export async function GET() {
 
     const projects = await db.collection('projects').find({}).toArray();
     console.log('SWR project called');
+
+    revalidatePath('/');
 
     return NextResponse.json(projects, {
       headers: {
