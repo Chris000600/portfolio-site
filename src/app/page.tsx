@@ -1,23 +1,41 @@
-import ProjectGrid from '@/components/ProjectGrid';
-import classes from './page.module.css';
-import { Suspense } from 'react';
-import { getProjects } from '@/lib/projects';
-import Projects from '@/components/Projects';
+import type { Metadata } from 'next';
+import Wrapper from '@/layouts/Wrapper';
 
-// async function Projects() {
-//   // this component will be the one that fetches the data instead of the whole page
-//   // advantageous because this is rendered server-side unlike SWR
-//   const response = await getProjects();
+import HeaderOne from '@/layouts/headers/HeaderOne';
+import FooterOne from '@/layouts/footers/FooterOne';
+import HeroArea from '@/components/home/HeroArea';
+import BrandArea from '@/components/home/BrandArea';
+import AboutArea from '@/components/home/AboutArea';
+import ServiceArea from '@/components/home/ServiceArea';
+import PortfolioArea from '@/components/home/PortfolioArea';
+import TestimonoalArea from '@/components/home/TestimonoalArea';
+import BlogArea from '@/components/home/BlogArea';
+import ContactArea from '@/components/home/ContactArea';
 
-//   return <ProjectGrid projects={JSON.parse(response)} />;
-// }
+export const metadata: Metadata = {
+  title: "Christopher's Portfolio",
+  description: 'A portfolio site built with Next.js, Tailwind CSS, and MongoDB.'
+};
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100">
-      <Suspense fallback={<p className={classes.loading}>Fetching meals...</p>}>
-        <Projects />
-      </Suspense>
-    </div>
+    <Wrapper>
+      <HeaderOne />
+      <div id="smooth-wrapper">
+        <div id="smooth-content">
+          <main>
+            <HeroArea />
+            <BrandArea />
+            <AboutArea />
+            <ServiceArea />
+            <PortfolioArea />
+            <TestimonoalArea />
+            <BlogArea />
+            <ContactArea />
+          </main>
+          <FooterOne />
+        </div>
+      </div>
+    </Wrapper>
   );
 }

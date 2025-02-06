@@ -1,9 +1,8 @@
 'use client';
 
 import { useActionState, useState } from 'react';
-import { uploadImage } from '@/lib/cloudinary';
 import { createProject } from '@/lib/projects';
-import ImagePicker from './ImagePicker';
+import ImagePicker from '../common/ImagePicker';
 import ProjectSubmitButton from './ProjectSubmitButton';
 
 const ProjectForm = () => {

@@ -1,6 +1,6 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]/route';
-import SignOutButton from '@/components/SignOutButton';
+import SignOutButton from '@/components/projects/SignOutButton';
 
 export default async function AdminPage() {
   // Get session server-side

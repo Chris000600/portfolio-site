@@ -4,11 +4,7 @@
     "skipLibCheck": true, // Skip type checking for node_modules
     "strict": false, // Disable strict mode to reduce TypeScript errors
     "target": "ES2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -23,19 +19,17 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"],
+      "@/assets/*": ["./public/assets/*"]
     },
     "strictNullChecks": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "public/assets/plugins/gsap-scroll-smoother.js",
+    "public/assets/plugins/gsap-scroll-trigger.js",
+    "src/plugins/index.js",
+    "src/utils/scrollSmother.js"
   ]
 }
