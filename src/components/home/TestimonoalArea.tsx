@@ -1,4 +1,6 @@
 // TODO
+// make them grid-style like in portfolio area
+// make long messages "see more"
 export default function TestimonoalArea() {
   return (
     <>
@@ -7,7 +9,7 @@ export default function TestimonoalArea() {
           <div className="row">
             <div className="col-xl-12 col-lg-12">
               <div className="section-title section-black-title wow fadeInUp delay-0-2s">
-                <h2>Testinomials</h2>
+                <h2>Recommendations</h2>
               </div>
             </div>
           </div>
@@ -16,94 +18,74 @@ export default function TestimonoalArea() {
               <div className="testimonial-item wow fadeInUp delay-0-2s">
                 <div className="author">
                   <img
-                    src="assets/images/testimonials/author1.jpg"
+                    src="assets/images/testimonials/author6.jpg"
                     alt="Author"
                   />
                 </div>
                 <div className="text">
-                  Financial planners help people to knowledge in about how to
-                  invest and in save their moneye the most efficient way eve
-                  plan ners help people tioniio know ledige in about how.
+                  Chris exhibits an extraordinary attention to detail,
+                  consistently solving problems that others struggle in. His
+                  reliability and precision were integral to the smooth
+                  execution of our most critical projects. Chris operates with a
+                  level of thoroughness and commitment that significantly
+                  elevates the quality of any work he undertakes, ensuring
+                  nothing is overlooked and every challenge is meticulously
+                  addressed.
                 </div>
                 <div className="testi-des">
-                  <h5>Zonathon Doe</h5>
-                  <span>CEO & Founder X</span>
+                  <h5>William Wu</h5>
+                  <span>CEO & Founder - Artisse AI</span>
                 </div>
               </div>
             </div>
             <div className="col-lg-6 col-md-6">
-              <div className="testimonial-item wow fadeInUp delay-0-4s">
-                <div className="author">
-                  <img
-                    src="assets/images/testimonials/author2.jpg"
-                    alt="Author"
-                  />
-                </div>
-                <div className="text">
-                  Asian planners help people to knowledge in about how to invest
-                  and in save their moneye the most efficient way eve plan ners
-                  help people tioniio know ledige in about how.
-                </div>
-                <div className="testi-des">
-                  <h5>Martin Smith</h5>
-                  <span>CEO & Founder Google</span>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6">
               <div className="testimonial-item wow fadeInUp delay-0-6s">
                 <div className="author">
                   <img
-                    src="assets/images/testimonials/author3.jpg"
+                    src="assets/images/testimonials/author8.jpg"
                     alt="Author"
                   />
                 </div>
                 <div className="text">
-                  Hello planners help people to knowledge in about how to invest
-                  and in save their moneye the most efficient way eve plan ners
-                  help people tioniio know ledige in about how.
+                  I know Chris while I was working at Artisse as an analyst.
+                  Chris is one person who can wear many hats. We all know how it
+                  is like working in a startup, its fast paced and you need to
+                  sometimes do a lot of tasks at the same time. Whether it is
+                  data, or working with research teams, or be a part of B2B
+                  developments or hiring, Chris can manage it all. He has my
+                  highest recommendation!
                 </div>
                 <div className="testi-des">
-                  <h5>Methail Dev</h5>
-                  <span>Managing Director - Paydesk</span>
+                  <h5>Hrishita Sarkar</h5>
+                  <span>Analyst - Artisse AI</span>
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 col-md-6">
-              <div className="testimonial-item wow fadeInUp delay-0-8s">
+            <div className="col-lg-12 col-md-12">
+              <div className="testimonial-item wow fadeInUp delay-0-4s">
                 <div className="author">
                   <img
-                    src="assets/images/testimonials/author4.jpg"
+                    src="assets/images/testimonials/author7.jpg"
                     alt="Author"
                   />
                 </div>
                 <div className="text">
-                  Financial planners help people to knowledge in about how to
-                  invest and in save their moneye the most efficient way eve
-                  plan ners help people tioniio know ledige in about how.
+                  I had the pleasure of working closely with Chris when he
+                  joined our team to support AI research and initiatives in the
+                  Founders Office. From day one, he brought an impressive mix of
+                  technical expertise, strategic thinking, and a proactive
+                  attitude. Chris was instrumental in streamlining our AI
+                  research and B2B initiatives, and his ability to tackle
+                  complex challenges with creativity and focus made a big
+                  impact. He didn’t just deliver on tasks—he took ownership,
+                  drove results, and was always a step ahead in anticipating
+                  what was needed. On top of all that, Chris is a fantastic team
+                  player with a positive energy that inspires those around him.
+                  Any team would be lucky to have him!
                 </div>
                 <div className="testi-des">
-                  <h5>Eliana tweet</h5>
-                  <span>CEO & Founder Tesla</span>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6">
-              <div className="testimonial-item wow fadeInUp delay-0-9s">
-                <div className="author">
-                  <img
-                    src="assets/images/testimonials/author5.jpg"
-                    alt="Author"
-                  />
-                </div>
-                <div className="text">
-                  Yelp planners help people to knowledge in about how to invest
-                  and in save their moneye the most efficient way eve plan ners
-                  help people tioniio know ledige in about how.
-                </div>
-                <div className="testi-des">
-                  <h5>Henry Clark</h5>
-                  <span>Founder Oxyzen</span>
+                  <h5>Aditya Nair</h5>
+                  <span>Co-Founder & CPO - Artisse AI</span>
                 </div>
               </div>
             </div>

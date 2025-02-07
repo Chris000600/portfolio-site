@@ -70,7 +70,7 @@ export default function PortfolioArea() {
   return (
     <>
       <div
-        className="projects-area"
+        className="projects-area container"
         id="portfolio"
       >
         <div className="custom-icon">
@@ -95,7 +95,10 @@ export default function PortfolioArea() {
                     <Image
                       src={item.image}
                       alt=""
-                      style={{ height: 'auto' }}
+                      style={{
+                        height: '40vh',
+                        objectFit: 'cover'
+                      }}
                       data-rjs="2"
                     />
                     <span className="portfolio-category">{item.category}</span>

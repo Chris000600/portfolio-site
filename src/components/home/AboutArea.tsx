@@ -1,23 +1,24 @@
 import Count from '../common/Count';
 
+// TODO
 const counter_data = [
   {
     id: 1,
-    title: 'Years Of Experience',
-    count: 8,
+    title: 'Years Of Coding Experience',
+    count: 10,
     cls: 'plus'
   },
   {
     id: 2,
-    title: 'Completed Projects',
-    count: 1,
-    cls: 'k-plus'
+    title: 'Programming Languages',
+    count: 19,
+    cls: ''
   },
   {
     id: 3,
-    title: 'Client Satisfactions',
-    count: 90,
-    cls: 'percent'
+    title: 'Projects',
+    count: 32,
+    cls: 'plus'
   }
 ];
 
@@ -34,14 +35,19 @@ export default function AboutArea() {
               <h2 className="about-pre-title">About Me</h2>
             </div>
             <div className="col-lg-9 col-sm-9">
-              {/* TODO */}
               <div className="about-content-part wow fadeInUp delay-0-2s">
                 <p>
-                  I am Christopher William, a seasoned UX designer with over 8
-                  years of experience in crafting intuitive and engaging digital
-                  experiences. My journey began with a background in graphic
-                  design, where I discovered my passion for understanding user
-                  behavior and translating it into seamless interactions.
+                  "I’m Christopher William, a programmer and AI analyst based in
+                  Jakarta, Indonesia, with a B.S. in Computer Science from The
+                  University of Western Australia. I specialize in AI
+                  optimization, business intelligence, and workflow automation,
+                  helping businesses enhance performance with cutting-edge
+                  technology. Proficient in TypeScript, Python, and Rust, I
+                  leverage modern tools like AI Agents, Next.js, and Tauri,
+                  backed by a strong foundation in data analysis and machine
+                  learning. Fluent in English, Mandarin, and Bahasa Indonesia, I
+                  combine technical expertise with strategic problem-solving to
+                  drive smarter business solutions."
                 </p>
               </div>
               <div className="hero-counter-area d-flex justify-content-between wow fadeInUp delay-0-4s">

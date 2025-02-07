@@ -1,4 +1,5 @@
 // TODO
+// add buttons
 
 export default function BlogArea() {
   return (

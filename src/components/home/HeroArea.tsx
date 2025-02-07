@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function HeroArea() {
   return (
     <>
@@ -21,29 +23,30 @@ export default function HeroArea() {
                     <li>
                       <img
                         className="img-fluid"
-                        src="assets/images/avatar/01.jpg"
+                        src="assets/images/avatar/03.png"
                         alt="client"
                       />
                     </li>
                     <li>
                       <img
                         className="img-fluid"
-                        src="assets/images/avatar/02.jpg"
+                        src="assets/images/avatar/02.svg"
                         alt="client"
                       />
                     </li>
                     <li>
                       <img
                         className="img-fluid"
-                        src="assets/images/avatar/03.jpg"
+                        src="assets/images/avatar/01.png"
                         alt="client"
                       />
                     </li>
                   </ul>
-                  {/* TODO */}
                   <div className="reviews">
-                    100+ reviews <span>(4.96 of 5)</span>
-                    <p>Five-star reviews from my esteemed clients.</p>
+                    Digitalize <span>your Business</span>
+                    <p>
+                      Utilize the latest technologies to improve your workflow.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -51,26 +54,24 @@ export default function HeroArea() {
             <div className="col-lg-6">
               <div className="hero-image">
                 <img
-                  src="assets/images/about/me.jpg"
+                  src="assets/images/about/me1.jpg"
                   alt=""
                 />
               </div>
             </div>
-            {/* TODO */}
             <div className="col-lg-3 pt-30">
               <div className="hero-content wow fadeInUp delay-0-4s">
                 <p>
-                  Hi, I’m Chris, a passionate UX Designer dedicated to creating
-                  user-friendly digital experiences.
+                  Hi, I'm Chris—a seasoned programmer helping businesses
+                  digitalize, optimize, and run smarter with AI and data.
                 </p>
 
-                {/* TODO */}
-                <a
+                <Link
+                  href={'/contact'}
                   className="theme-btn"
-                  href=""
                 >
                   Get In touch
-                </a>
+                </Link>
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 // TODO:
 // - use useActionState and integrate mailing functionality
-// - fix content details
+// - make IG, WA link
 export default function ContactArea() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -40,8 +40,8 @@ export default function ContactArea() {
                   <span className="circle-btn">
                     <i className="ri-map-pin-line"></i>
                   </span>
-                  <h2>our office:</h2>
-                  <p>Jurain,Dhaka Bangladesh</p>
+                  <h2>Location:</h2>
+                  <p>Jakarta, Indonesia</p>
                 </div>
 
                 <div
@@ -52,7 +52,12 @@ export default function ContactArea() {
                     <i className="ri-headphone-line"></i>
                   </span>
                   <h2>contact number:</h2>
-                  <p>+1234321321</p>
+                  <a
+                    target="_blank"
+                    href="https://wa.me/+6282113229245"
+                  >
+                    <p>(+62) 821-1322-9245</p>
+                  </a>
                 </div>
 
                 <div
@@ -62,8 +67,8 @@ export default function ContactArea() {
                   <span className="circle-btn">
                     <i className="ri-mail-line"></i>
                   </span>
-                  <h2>Email us:</h2>
-                  <p>websitename@mail.com</p>
+                  <h2>Email me:</h2>
+                  <p>chrisw6920@gmail.com</p>
                 </div>
 
                 <div
@@ -76,23 +81,15 @@ export default function ContactArea() {
                       <li>
                         <a
                           target="_blank"
-                          href="https://facebook.com"
+                          href="https://wa.me/+6282113229245"
                         >
-                          <i className="ri-facebook-circle-fill"></i>
+                          <i className="ri-whatsapp-line"></i>
                         </a>
                       </li>
                       <li>
                         <a
                           target="_blank"
-                          href="https://twitter.com"
-                        >
-                          <i className="ri-twitter-x-line"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://linkedin.com"
+                          href="https://www.linkedin.com/in/christopherwilliam00/"
                         >
                           <i className="ri-linkedin-fill"></i>
                         </a>
@@ -100,9 +97,25 @@ export default function ContactArea() {
                       <li>
                         <a
                           target="_blank"
-                          href="https://github.com/jamilrayhan10"
+                          href="https://github.com/Chris000600"
                         >
-                          <i className="ri-github-line"></i>
+                          <i className="ri-github-fill"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          target="_blank"
+                          href="https://www.facebook.com/chris.will.00/"
+                        >
+                          <i className="ri-facebook-circle-fill"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          target="_blank"
+                          href="https://www.instagram.com/"
+                        >
+                          <i className="ri-instagram-line"></i>
                         </a>
                       </li>
                     </ul>
@@ -128,7 +141,7 @@ export default function ContactArea() {
                           className="form-control"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          placeholder="Steve Milner"
+                          placeholder="John Doe"
                           required
                           data-error="Please enter your Name"
                         />

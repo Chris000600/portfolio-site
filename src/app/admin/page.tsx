@@ -1,6 +1,9 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 import SignOutButton from '@/components/projects/SignOutButton';
+import { Suspense } from 'react';
+import Projects from '@/components/projects/Projects';
+import classes from '../page.module.css';
 
 export default async function AdminPage() {
   // Get session server-side
@@ -21,7 +24,15 @@ export default async function AdminPage() {
       <h1>Admin Panel</h1>
       <p>Welcome, {session.user?.name}!</p>
       <p>Your email: {session.user?.email}</p>
+
       <SignOutButton />
+      <div className="min-h-screen flex justify-center items-center bg-gray-100">
+        <Suspense
+          fallback={<p className={classes.loading}>Fetching meals...</p>}
+        >
+          <Projects />
+        </Suspense>
+      </div>
     </div>
   );
 }

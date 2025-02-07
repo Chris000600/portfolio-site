@@ -1,3 +1,7 @@
+// TODO
+// - add link
+// - add image as background
+
 export default function ServiceArea() {
   return (
     <>
@@ -13,17 +17,16 @@ export default function ServiceArea() {
               </div>
             </div>
           </div>
-          {/* TODO */}
           <div className="row">
             <div className="col-lg-8 col-md-7">
               <div className="service-item wow fadeInUp delay-0-2s">
                 <i className="ri-arrow-right-up-line"></i>
                 <h5>01</h5>
-                <h4>Brand Identity Design</h4>
+                <h4>Dynamic Web Solutions</h4>
                 <p>
-                  Blend of strategic thinking and creative flair to craft a
-                  digital identity that resonates and captivates. kits you need
-                  to create a true website within minutes.
+                  Crafting high-performance, visually stunning websites with
+                  cutting-edge technology for a scalable and optimized digital
+                  presence.
                 </p>
               </div>
             </div>
@@ -32,10 +35,9 @@ export default function ServiceArea() {
               <div className="service-item wow fadeInUp delay-0-4s">
                 <i className="ri-arrow-right-up-line"></i>
                 <h5>02</h5>
-                <h4>Visual Design</h4>
+                <h4>1-on-1 Consulting</h4>
                 <p>
-                  Blend of artistic intuition with strategic insight to craft a
-                  visual identity.
+                  Improving business efficiency through data-driven strategies.
                 </p>
               </div>
             </div>
@@ -44,10 +46,10 @@ export default function ServiceArea() {
               <div className="service-item wow fadeInUp delay-0-6s">
                 <i className="ri-arrow-right-up-line"></i>
                 <h5>03</h5>
-                <h4>UX Research</h4>
+                <h4>AI-Powered Optimization</h4>
                 <p>
-                  Blend of functionality with aesthetics to create delightful
-                  experience.
+                  Leveraging AI Agents to boost workflow productivity and reduce
+                  inefficiencies.
                 </p>
               </div>
             </div>
@@ -56,10 +58,11 @@ export default function ServiceArea() {
               <div className="service-item wow fadeInUp delay-0-8s">
                 <i className="ri-arrow-right-up-line"></i>
                 <h5>04</h5>
-                <h4>Art Direction</h4>
+                <h4>Smart Systems Design</h4>
                 <p>
-                  Blend of strategic thinking and artistic finesse to craft a
-                  visual identity that goes beyond aesthetics.
+                  Developing tailored business systems, from mini-ERP to
+                  enterprise solutions, ensuring security, efficiency, and
+                  seamless integration.
                 </p>
               </div>
             </div>

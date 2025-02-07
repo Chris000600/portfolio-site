@@ -19,11 +19,10 @@ export default function HeaderOne() {
                 <div className="col-xl-2 col-lg-2 col-md-6 col-6 col-sm-3">
                   <div className="logo-area">
                     <div className="logo">
-                      {/* TODO */}
                       <Link href="/">
                         <img
-                          src="assets/images/logo.png"
-                          alt=""
+                          src="assets/images/logo1.png"
+                          alt="logo.png"
                         />
                       </Link>
                     </div>

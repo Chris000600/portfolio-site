@@ -29,38 +29,43 @@ export default function BrandArea() {
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <h2>Company I Worked With</h2>
+              <h2>Companies I Worked With</h2>
               <div className="company-list">
                 <div
                   className="scroller"
                   data-direction="left"
                   data-speed="slow"
                 >
-                  <div className="scroller__inner">
-                    {/* TODO */}
+                  <div className="scroller__inner align-items-center">
                     <img
-                      src="assets/images/client-logos/partner1.png"
-                      alt="Company"
+                      style={{ height: '50px', objectFit: 'contain' }}
+                      src="assets/images/client-logos/partner6.png"
+                      alt="Emtek"
                     />
                     <img
-                      src="assets/images/client-logos/partner2.png"
-                      alt="Company"
+                      style={{ height: '50px', objectFit: 'contain' }}
+                      src="assets/images/client-logos/partner7.png"
+                      alt="Vidio"
                     />
                     <img
-                      src="assets/images/client-logos/partner3.png"
-                      alt="Company"
+                      style={{ height: '50px', objectFit: 'contain' }}
+                      src="assets/images/client-logos/partner8.png"
+                      alt="Artisse"
                     />
                     <img
+                      style={{ height: '50px', objectFit: 'contain' }}
                       src="assets/images/client-logos/partner4.png"
-                      alt="Company"
+                      alt="SF"
                     />
                     <img
+                      style={{ height: '100px', objectFit: 'contain' }}
+                      src="assets/images/client-logos/partner9.png"
+                      alt="Clinic"
+                    />
+                    <img
+                      style={{ height: '100px', objectFit: 'contain' }}
                       src="assets/images/client-logos/partner5.png"
-                      alt="Company"
-                    />
-                    <img
-                      src="assets/images/client-logos/partner1.png"
-                      alt="Company"
+                      alt="VUS"
                     />
                   </div>
                 </div>
