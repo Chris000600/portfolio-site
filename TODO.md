@@ -3,18 +3,19 @@
 ## Pages
 
 - Home
+  - about area: numbers
   - portfolio area: blocker: projects TBA
-  - recommendations area
+  - recommendations area: see more
   - blog area: blocker: actual blog stories (latest AI news)
-- About
-- Services
-- Projects
-- Single Project
+- Projects:
+  - redesign: grid layout sth like about page
+  - onclick: redirect to
+    - Single Project
 - Blog
-- Contact
 
 ## Functionality
 
+- Navbar to point just to projects
 - Proper contact feature
 - Static images
 - Hosted images

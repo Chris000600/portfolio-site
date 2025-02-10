@@ -110,14 +110,14 @@ export default function ContactArea() {
                           <i className="ri-facebook-circle-fill"></i>
                         </a>
                       </li>
-                      <li>
+                      {/* <li>
                         <a
                           target="_blank"
                           href="https://www.instagram.com/"
                         >
                           <i className="ri-instagram-line"></i>
                         </a>
-                      </li>
+                      </li> */}
                     </ul>
                   </div>
                 </div>

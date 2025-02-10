@@ -7,10 +7,10 @@ import Breadcrumb from '@/components/common/Breadcrumb';
 import ResumeArea from '@/components/about/ResumeArea';
 import SkillArea from '@/components/about/SkillArea';
 
-// TODO
 export const metadata: Metadata = {
-  title: 'About Christopher - Modern Portfolio made with Next JS',
-  description: 'TODO'
+  title: 'About Christopher',
+  description:
+    'Programmer and AI analyst based in Jakarta, Indonesia, with a B.S. in Computer Science from The University of Western Australia. I specialize in AI optimization, business intelligence, and workflow automation; helping businesses enhance performance with cutting-edge technology.'
 };
 
 export default function index() {
