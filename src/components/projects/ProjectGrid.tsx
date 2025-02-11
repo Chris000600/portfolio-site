@@ -60,13 +60,19 @@ const ProjectGrid = () => {
         className="projects-area container"
         id="portfolio"
       >
+        <div className="custom-icon">
+          <img
+            src="assets/images/custom/work-scribble.svg"
+            alt="custom"
+          />
+        </div>
         <div className="container-fluid">
-          <div className="row g-5 portfolio-grid">
+          <div className="row g-4 portfolio-grid">
             {portfolio_data.map((item, i) => (
               <ProjectCard
-                key={i}
                 item={item}
                 index={i}
+                key={i}
               />
             ))}
           </div>

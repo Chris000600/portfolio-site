@@ -1,13 +1,20 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]/route';
-import SignOutButton from '@/components/projects/dep/SignOutButton';
 import { Suspense } from 'react';
 import Projects from '@/components/projects/dep/Projects';
 import classes from '../page.module.css';
+import Wrapper from '@/layouts/Wrapper';
+import HeaderOne from '@/layouts/headers/HeaderOne';
+import Breadcrumb from '@/components/common/Breadcrumb';
+import ProjectsAdmin from '@/components/admin/ProjectsAdmin';
+import { getProjects } from '@/lib/projects';
 
 export default async function AdminPage() {
   // Get session server-side
   const session = await getServerSession(authOptions);
+
+  const results = await getProjects();
+  const projects = JSON.parse(results);
 
   if (!session) {
     // pretty much obsolete since middleware have rerouted
@@ -20,19 +27,22 @@ export default async function AdminPage() {
   }
 
   return (
-    <div>
-      <h1>Admin Panel</h1>
-      <p>Welcome, {session.user?.name}!</p>
-      <p>Your email: {session.user?.email}</p>
+    <Wrapper>
+      <HeaderOne />
+      <div id="smooth-wrapper">
+        <div id="smooth-content">
+          <main>
+            <Breadcrumb
+              title={`Admin: ${session.user?.name.split(' ')[0]}`}
+              email={session.user?.email}
+            />
 
-      <SignOutButton />
-      <div className="min-h-screen flex justify-center items-center bg-gray-100">
-        <Suspense
-          fallback={<p className={classes.loading}>Fetching meals...</p>}
-        >
-          <Projects />
-        </Suspense>
+            <div className="container">
+              <ProjectsAdmin projects={projects} />
+            </div>
+          </main>
+        </div>
       </div>
-    </div>
+    </Wrapper>
   );
 }

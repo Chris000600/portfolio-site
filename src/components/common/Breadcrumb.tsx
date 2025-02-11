@@ -1,4 +1,12 @@
-export default function Breadcrumb({ title, style_2, style_3, style_4 }: any) {
+import SignOutButton from '../projects/dep/SignOutButton';
+
+export default function Breadcrumb({
+  title,
+  style_2,
+  style_3,
+  style_4,
+  email
+}: any) {
   return (
     <>
       <section className="single-page-hero-area">
@@ -22,6 +30,12 @@ export default function Breadcrumb({ title, style_2, style_3, style_4 }: any) {
               )}
               {style_4 && (
                 <p>Stories, Advice, and Inspiration for the Curious Mind</p>
+              )}
+              {email && (
+                <p>
+                  Signed in using: {email}
+                  <SignOutButton />
+                </p>
               )}
             </div>
           </div>

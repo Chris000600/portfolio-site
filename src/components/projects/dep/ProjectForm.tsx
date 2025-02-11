@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useState } from 'react';
+import { useActionState } from 'react';
 import { createProject } from '@/lib/projects';
 import ImagePicker from '../../common/ImagePicker';
 import ProjectSubmitButton from './ProjectSubmitButton';
@@ -16,7 +16,7 @@ const ProjectForm = () => {
   });
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className="p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-xl font-semibold mb-4">Add a New Project</h2>
       <form
         action={formAction}

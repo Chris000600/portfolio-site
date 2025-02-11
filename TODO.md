@@ -1,5 +1,29 @@
 # TODO
 
+## Functionality
+
+- Proper contact feature
+- Static images
+- Hosted images
+- Admin page
+
+  - CRUD projects : blocker: identify projects
+
+    - title
+    - date
+    - category
+    - images
+    - thumbnail (select from uploaded images)
+    - link
+    - text
+
+  - CRUD companies (postponed)
+  - CRUD recommendations (postponed)
+  - CRUD services (postponed)
+  - CRUD blog (disabled)
+
+- fix mobile reactivity
+
 ## Pages
 
 - Home
@@ -10,14 +34,3 @@
   - pagination
   - search
   - blogcard link
-
-## Functionality
-
-- Proper contact feature
-- Static images
-- Hosted images
-- Admin page
-  - CRUD projects
-  - CRUD blog
-  - CRUD services
-- fix mobile reactivity
