@@ -21,7 +21,7 @@ export default function HeaderOne() {
                     <div className="logo">
                       <Link href="/">
                         <img
-                          src="assets/images/logo1.png"
+                          src="/assets/images/logo1.png"
                           alt="logo.png"
                         />
                       </Link>

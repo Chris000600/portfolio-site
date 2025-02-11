@@ -41,12 +41,6 @@ export default function SingleProjectArea() {
   return (
     <>
       <div className="single-project-page-design">
-        <div className="single-project-image">
-          <img
-            src="assets/images/projects/work2.jpg"
-            alt="image"
-          />
-        </div>
         <div className="container pt-60 pb-40">
           <div className="row">
             <div className="col-lg-4">
@@ -109,7 +103,10 @@ export default function SingleProjectArea() {
                   <div className="single-image wow fadeInUp delay-0-2s">
                     <Image
                       src={item.image}
-                      style={{ height: 'auto' }}
+                      style={{
+                        height: '40vh',
+                        objectFit: 'cover'
+                      }}
                       alt="gallery"
                     />
                   </div>

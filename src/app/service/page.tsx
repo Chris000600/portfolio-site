@@ -4,15 +4,14 @@ import FooterOne from '@/layouts/footers/FooterOne';
 import HeaderOne from '@/layouts/headers/HeaderOne';
 import Wrapper from '@/layouts/Wrapper';
 import { Metadata } from 'next';
-import React from 'react';
 
-// TODO
 export const metadata: Metadata = {
-  title: "Christopher's Services",
-  description: 'TODO'
+  title: "Christopher's Services – Web Solutions, Consulting, AI Optimization",
+  description:
+    'Explore services including dynamic web solutions, personalized consulting, AI-powered optimization, and smart systems design to elevate your business.'
 };
 
-export default function index() {
+export default function ServicePage() {
   return (
     <Wrapper>
       <HeaderOne />

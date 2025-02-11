@@ -1,7 +1,5 @@
-'use client';
 import Image, { StaticImageData } from 'next/image';
-import { useState } from 'react';
-import ImagePopup from '@/modals/ImagePopup';
+import Link from 'next/link';
 
 import portfolio_img_1 from '@/assets/images/projects/img1.png';
 import portfolio_img_2 from '@/assets/images/projects/img2.png';
@@ -57,16 +55,6 @@ const portfolio_data: DataType[] = [
 ];
 
 export default function PortfolioArea() {
-  const [photoIndex, setPhotoIndex] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleImagePopup = (i: any) => {
-    setPhotoIndex(i);
-    setIsOpen(true);
-  };
-
-  const images = portfolio_data.slice(0, 5).map((item) => item.image.src);
-
   return (
     <>
       <div
@@ -86,9 +74,9 @@ export default function PortfolioArea() {
                 key={i}
                 className={`col-md-6 col-xl-${item.col} portfolio-item category-1`}
               >
-                <a
+                <Link
+                  href={`/projects/${item.title}`}
                   style={{ cursor: 'pointer' }}
-                  onClick={() => handleImagePopup(i)}
                   className="work-popup"
                 >
                   <div className="portfolio-box">
@@ -106,21 +94,12 @@ export default function PortfolioArea() {
                       <h1>{item.title}</h1>
                     </div>
                   </div>
-                </a>
+                </Link>
               </div>
             ))}
           </div>
         </div>
       </div>
-
-      {isOpen && (
-        <ImagePopup
-          images={images}
-          setIsOpen={setIsOpen}
-          photoIndex={photoIndex}
-          setPhotoIndex={setPhotoIndex}
-        />
-      )}
     </>
   );
 }

@@ -1,18 +1,18 @@
 import Breadcrumb from '@/components/common/Breadcrumb';
 import PortfolioArea from '@/components/home/PortfolioArea';
+import ProjectGrid from '@/components/projects/ProjectGrid';
 import FooterOne from '@/layouts/footers/FooterOne';
 import HeaderOne from '@/layouts/headers/HeaderOne';
 import Wrapper from '@/layouts/Wrapper';
 import { Metadata } from 'next';
-import React from 'react';
 
-// TODO
 export const metadata: Metadata = {
   title: "Christopher's Projects",
-  description: ''
+  description:
+    'Browse through a selection of projects which Christopher has done in the past'
 };
 
-export default function index() {
+export default function ProjectsPage() {
   return (
     <Wrapper>
       <HeaderOne />
@@ -23,7 +23,7 @@ export default function index() {
               title="Projects"
               style_2={true}
             />
-            <PortfolioArea />
+            <ProjectGrid />
           </main>
           <FooterOne />
         </div>

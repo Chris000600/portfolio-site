@@ -8,12 +8,12 @@ import ResumeArea from '@/components/about/ResumeArea';
 import SkillArea from '@/components/about/SkillArea';
 
 export const metadata: Metadata = {
-  title: 'About Christopher',
+  title: 'About Christopher – AI Analyst & Programmer in Jakarta',
   description:
-    'Programmer and AI analyst based in Jakarta, Indonesia, with a B.S. in Computer Science from The University of Western Australia. I specialize in AI optimization, business intelligence, and workflow automation; helping businesses enhance performance with cutting-edge technology.'
+    "Learn about Christopher's journey in AI optimization and business intelligence, and how he helps businesses run smarter with cutting-edge technology."
 };
 
-export default function index() {
+export default function AboutPage() {
   return (
     <Wrapper>
       <HeaderOne />

@@ -3,19 +3,16 @@
 ## Pages
 
 - Home
-  - about area: numbers
   - portfolio area: blocker: projects TBA
-  - recommendations area: see more
-  - blog area: blocker: actual blog stories (latest AI news)
-- Projects:
-  - redesign: grid layout sth like about page
-  - onclick: redirect to
-    - Single Project
-- Blog
+  - about area: prj numbers
+  - recommendations area (postponed): see more and make them clickable
+- Blog (disabled until future updates):
+  - pagination
+  - search
+  - blogcard link
 
 ## Functionality
 
-- Navbar to point just to projects
 - Proper contact feature
 - Static images
 - Hosted images
@@ -23,3 +20,4 @@
   - CRUD projects
   - CRUD blog
   - CRUD services
+- fix mobile reactivity

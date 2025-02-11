@@ -5,13 +5,13 @@ import HeaderOne from '@/layouts/headers/HeaderOne';
 import Wrapper from '@/layouts/Wrapper';
 import { Metadata } from 'next';
 
-// TODO
 export const metadata: Metadata = {
-  title: '',
-  description: ''
+  title: "Contact Christopher – Let's Collaborate",
+  description:
+    'Get in touch with Christopher for inquiries about services, collaborations, or any questions you may have.'
 };
 
-export default function index() {
+export default function ContactPage() {
   return (
     <Wrapper>
       <HeaderOne />

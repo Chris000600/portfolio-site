@@ -13,8 +13,9 @@ import BlogArea from '@/components/home/BlogArea';
 import ContactArea from '@/components/home/ContactArea';
 
 export const metadata: Metadata = {
-  title: "Christopher's Portfolio",
-  description: 'A portfolio site built with Next.js, Tailwind CSS, and MongoDB.'
+  title: "Christopher's Portfolio – Digital Transformation Expert",
+  description:
+    "Welcome to Christopher's portfolio. Discover how I leverage AI and data to digitalize businesses, enhancing efficiency and performance."
 };
 
 export default function Home() {
@@ -30,7 +31,7 @@ export default function Home() {
             <ServiceArea />
             <PortfolioArea />
             <TestimonoalArea />
-            <BlogArea />
+            {/* <BlogArea /> */}
             <ContactArea />
           </main>
           <FooterOne />

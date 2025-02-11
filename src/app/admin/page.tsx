@@ -1,8 +1,8 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]/route';
-import SignOutButton from '@/components/projects/SignOutButton';
+import SignOutButton from '@/components/projects/dep/SignOutButton';
 import { Suspense } from 'react';
-import Projects from '@/components/projects/Projects';
+import Projects from '@/components/projects/dep/Projects';
 import classes from '../page.module.css';
 
 export default async function AdminPage() {

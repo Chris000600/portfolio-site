@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
-import Wrapper from '@/layouts/Wrapper';
-import HeaderOne from '@/layouts/headers/HeaderOne';
+import { Metadata } from 'next';
 import Breadcrumb from '@/components/common/Breadcrumb';
 import FooterOne from '@/layouts/footers/FooterOne';
-import BlogDetailsArea from '@/components/blog-details/BlogDetailsArea';
+import HeaderOne from '@/layouts/headers/HeaderOne';
+import Wrapper from '@/layouts/Wrapper';
+import SingleProjectArea from '@/components/projects/single-project/SingleProjectArea';
 
 // TODO
 export const metadata: Metadata = {
@@ -33,15 +33,20 @@ export const metadata: Metadata = {
 
 // export default function ProjectPage({ params }: Props) {
 
-export default function BlogDetailsPage() {
+export default async function ProjectDetailsPage({ params }) {
+  const { id } = await params;
+
   return (
     <Wrapper>
       <HeaderOne />
       <div id="smooth-wrapper">
         <div id="smooth-content">
           <main>
-            <Breadcrumb title="Create a Landing Page That Performs Great" />
-            <BlogDetailsArea />
+            <Breadcrumb
+              title={id}
+              style_3={true}
+            />
+            <SingleProjectArea />
           </main>
           <FooterOne />
         </div>

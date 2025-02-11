@@ -26,13 +26,13 @@ export default function ContactArea() {
           <div className="row">
             <div className="col-xl-12 col-lg-12">
               <div className="section-title section-black-title wow fadeInUp delay-0-2s">
-                <h2>Contact Me</h2>
+                <h2 style={{ color: 'white' }}>Contact Me</h2>
               </div>
             </div>
           </div>
           <div className="row">
             <div className="col-lg-4">
-              <div className="contact-content-part  wow fadeInUp delay-0-2s">
+              <div className=" contact-content-part  wow fadeInUp delay-0-2s">
                 <div
                   className="single-contact wow fadeInUp"
                   data-wow-delay=".2s"

@@ -2,7 +2,7 @@
 
 import { useActionState, useState } from 'react';
 import { createProject } from '@/lib/projects';
-import ImagePicker from '../common/ImagePicker';
+import ImagePicker from '../../common/ImagePicker';
 import ProjectSubmitButton from './ProjectSubmitButton';
 
 const ProjectForm = () => {
