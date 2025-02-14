@@ -3380,3 +3380,9 @@ ul.blog_pagination li a:hover {
     transform: translate(calc(-50% - 0.5rem));
   }
 }
+
+.w-md-editor,
+.w-md-editor-preview,
+.w-md-editor-preview * {
+  color: black !important;
+}

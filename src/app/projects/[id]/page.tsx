@@ -4,6 +4,7 @@ import FooterOne from '@/layouts/footers/FooterOne';
 import HeaderOne from '@/layouts/headers/HeaderOne';
 import Wrapper from '@/layouts/Wrapper';
 import SingleProjectArea from '@/components/projects/single-project/SingleProjectArea';
+import { getProjectById } from '@/lib/projects';
 
 // TODO
 export const metadata: Metadata = {
@@ -35,6 +36,8 @@ export const metadata: Metadata = {
 
 export default async function ProjectDetailsPage({ params }) {
   const { id } = await params;
+  const response = await getProjectById(id);
+  const project = JSON.parse(response);
 
   return (
     <Wrapper>
@@ -42,11 +45,8 @@ export default async function ProjectDetailsPage({ params }) {
       <div id="smooth-wrapper">
         <div id="smooth-content">
           <main>
-            <Breadcrumb
-              title={id}
-              style_3={true}
-            />
-            <SingleProjectArea />
+            <Breadcrumb title={project.title} />
+            <SingleProjectArea project={project} />
           </main>
           <FooterOne />
         </div>

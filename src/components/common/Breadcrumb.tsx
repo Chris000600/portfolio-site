@@ -1,4 +1,4 @@
-import SignOutButton from '../projects/dep/SignOutButton';
+import SignOutButton from '../admin/SignOutButton';
 
 export default function Breadcrumb({
   title,

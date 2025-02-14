@@ -1,5 +1,5 @@
-import ProjectCard from './ProjectCard';
-import ProjectForm from './ProjectForm';
+import ProjectCard from '../../admin/ProjectCard';
+import ProjectForm from '../../admin/ProjectForm';
 import Project from '@/type/project';
 
 export default function ProjectGrid({ projects }: { projects: Project[] }) {

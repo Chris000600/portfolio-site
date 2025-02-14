@@ -4,18 +4,11 @@
 
 - Proper contact feature
 - Static images
-- Hosted images
-- Admin page
 
   - CRUD projects : blocker: identify projects
 
-    - title
-    - date
-    - category
-    - images
-    - thumbnail (select from uploaded images)
-    - link
-    - text
+    - updateform: image update
+    - tech input
 
   - CRUD companies (postponed)
   - CRUD recommendations (postponed)

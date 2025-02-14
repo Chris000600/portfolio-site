@@ -37,8 +37,10 @@ export default async function AdminPage() {
               email={session.user?.email}
             />
 
-            <div className="container">
-              <ProjectsAdmin projects={projects} />
+            <div className="resume-area">
+              <div className="container">
+                <ProjectsAdmin projects={projects} />
+              </div>
             </div>
           </main>
         </div>

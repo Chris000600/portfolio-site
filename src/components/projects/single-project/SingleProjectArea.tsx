@@ -4,30 +4,16 @@ import img_1 from '@/assets/images/projects/img1.png';
 import img_2 from '@/assets/images/projects/img2.png';
 import img_3 from '@/assets/images/projects/img3.png';
 import img_4 from '@/assets/images/projects/img4.png';
-import Image from 'next/image';
+import markdownit from 'markdown-it';
 import ImagePopup from '@/modals/ImagePopup';
+import Project from '@/types/project';
+import Link from 'next/link';
 
-// TODO
-const portfolio_images = [
-  {
-    id: 1,
-    image: img_1
-  },
-  {
-    id: 2,
-    image: img_2
-  },
-  {
-    id: 3,
-    image: img_3
-  },
-  {
-    id: 4,
-    image: img_4
-  }
-];
+const md = markdownit();
 
-export default function SingleProjectArea() {
+export default function SingleProjectArea({ project }: { project: Project }) {
+  const parsedContent = md.render(project?.description || '');
+
   const [photoIndex, setPhotoIndex] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,7 +22,10 @@ export default function SingleProjectArea() {
     setIsOpen(true);
   };
 
-  const images = portfolio_images.slice(0, 5).map((item) => item.image.src);
+  let images: string[] = [];
+  images.push(project.thumbnail);
+  project.images.map((image) => images.push(image));
+  console.log(images);
 
   return (
     <>
@@ -46,51 +35,44 @@ export default function SingleProjectArea() {
             <div className="col-lg-4">
               <div className="single-project-page-left wow fadeInUp delay-0-2s">
                 <div className="single-info">
-                  <p>Year</p>
-                  <h3>2024</h3>
+                  <p>Date</p>
+                  <h3>{project.date}</h3>
                 </div>
                 <div className="single-info">
-                  <p>Client</p>
-                  <h3>Bento Studio</h3>
+                  <p>Tech</p>
+                  <h3>{project.technology}</h3>
                 </div>
-                <div className="single-info">
-                  <p>Services</p>
-                  <h3>Web Design</h3>
-                </div>
-                <div className="single-info">
-                  <p>Project</p>
-                  <h3>Creative</h3>
-                </div>
+                {project.link && (
+                  <div className="single-info ">
+                    <p>Link</p>
+                    <Link
+                      href={project.link}
+                      target="_blank"
+                    >
+                      <h3>Visit Live Link</h3>
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
 
             <div className="col-lg-8">
               <div className="single-project-page-right wow fadeInUp delay-0-4s">
                 <h2>Description</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit utsadi
-                  sfejdis aliquam, purus sit amet luctus venenatis, lectus magna
-                  sansit trandis fringilla urna, porttitor rhoncus dolor purus
-                  non enim dollors praesent tabasi elementum facilisis leo.
-                </p>
-                <p>
-                  Contrary to popular belief, Lorem Ipsum is not simply random
-                  text. It has roots in a piece of classical Latin literature
-                  from 45 BC, making it over 2000 years old. Richard McClintock,
-                  a Latin professor at Hampden-Sydney College in Virginia,
-                  looked up one of the more obscure Latin words, consectetur,
-                  from a Lorem Ipsum passage, and going through the cites of the
-                  word in classical literature, discovered the undoubtable sourc
-                  consectetur, from a Lorem Ipsum passage, and going through the
-                  cites of the word in classical literature, discovered the
-                  undoubtable source.
-                </p>
+                {parsedContent ? (
+                  <article
+                    className="prose max-w-4xl font-work-sans break-all"
+                    dangerouslySetInnerHTML={{ __html: parsedContent }}
+                  />
+                ) : (
+                  <p className="no-result">No details provided</p>
+                )}
               </div>
             </div>
           </div>
 
           <div className="row pt-60">
-            {portfolio_images.map((item, i) => (
+            {images.map((image, i) => (
               <div
                 className="col-lg-6"
                 key={i}
@@ -101,11 +83,14 @@ export default function SingleProjectArea() {
                   className="work-popup"
                 >
                   <div className="single-image wow fadeInUp delay-0-2s">
-                    <Image
-                      src={item.image}
+                    <img
+                      src={image}
                       style={{
                         height: '40vh',
-                        objectFit: 'cover'
+                        width: '100%',
+                        objectFit: 'cover',
+                        border: '2px solid #272727', // Added border style
+                        borderRadius: '1rem'
                       }}
                       alt="gallery"
                     />
