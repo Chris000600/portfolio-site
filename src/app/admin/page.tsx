@@ -1,8 +1,5 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]/route';
-import { Suspense } from 'react';
-import Projects from '@/components/projects/dep/Projects';
-import classes from '../page.module.css';
 import Wrapper from '@/layouts/Wrapper';
 import HeaderOne from '@/layouts/headers/HeaderOne';
 import Breadcrumb from '@/components/common/Breadcrumb';
@@ -12,6 +9,7 @@ import { getProjects } from '@/lib/projects';
 export default async function AdminPage() {
   // Get session server-side
   const session = await getServerSession(authOptions);
+  console.log('session: ', session);
 
   const results = await getProjects();
   const projects = JSON.parse(results);
