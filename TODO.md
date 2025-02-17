@@ -2,9 +2,6 @@
 
 ## Functionality
 
-- Proper contact feature
-- services redirect to contact form
-
 - populate with the right projects
 - fix mobile reactivity
 

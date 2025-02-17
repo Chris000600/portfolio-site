@@ -1,20 +1,35 @@
 'use client';
 import { useState } from 'react';
+import { useForm } from '@formspree/react';
 
-// TODO:
-// - use useActionState and integrate mailing functionality
-// - make IG, WA link
-export default function ContactArea() {
+interface ContactProps {
+  subject?: string;
+}
+
+export default function ContactArea({ subject }: ContactProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
+  const [s, setSubject] = useState(subject);
   const [message, setMessage] = useState('');
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    // Add form submission logic here
-    console.log('Form submitted:', { name, email, subject, message });
-  };
+  const [state, handleSubmit, reset] = useForm('movjpepz');
+
+  if (state.submitting) {
+    return (
+      <div className="d-flex justify-content-center align-items-center min-vh-100">
+        <h2>Submitting Form...</h2>
+      </div>
+    );
+  }
+
+  if (state.succeeded) {
+    reset();
+    setName('');
+    setEmail('');
+    setSubject('');
+    setMessage('');
+    alert('Inquiry submitted, I will get back to you promptly.');
+  }
 
   return (
     <>
@@ -138,6 +153,7 @@ export default function ContactArea() {
                         <input
                           type="text"
                           id="name"
+                          name="name"
                           className="form-control"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
@@ -160,6 +176,7 @@ export default function ContactArea() {
                         <input
                           type="email"
                           id="email"
+                          name="email"
                           className="form-control"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
@@ -182,8 +199,9 @@ export default function ContactArea() {
                         <input
                           type="text"
                           id="subject"
+                          name="subject"
                           className="form-control"
-                          value={subject}
+                          value={s}
                           onChange={(e) => setSubject(e.target.value)}
                           placeholder="Your Subject"
                           required
@@ -202,8 +220,8 @@ export default function ContactArea() {
                       <div className="form-group">
                         <label htmlFor="message">Your Message</label>
                         <textarea
-                          name="message"
                           id="message"
+                          name="message"
                           className="form-control"
                           rows={4}
                           value={message}
@@ -220,8 +238,12 @@ export default function ContactArea() {
                         <button
                           type="submit"
                           className="theme-btn"
+                          style={{
+                            borderRadius: '0.75rem'
+                          }}
+                          disabled={state.submitting}
                         >
-                          Send Me Message <i className="ri-mail-line"></i>
+                          Send Message <i className="ri-mail-line"></i>
                         </button>
                         <div
                           id="msgSubmit"
