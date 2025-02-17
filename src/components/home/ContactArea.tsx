@@ -1,6 +1,6 @@
 'use client';
-import { useState } from 'react';
-import { useForm } from '@formspree/react';
+import { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 interface ContactProps {
   subject?: string;
@@ -9,27 +9,45 @@ interface ContactProps {
 export default function ContactArea({ subject }: ContactProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [s, setSubject] = useState(subject);
+  const [s, setSubject] = useState(subject ? subject : '');
   const [message, setMessage] = useState('');
+  const [isSubmit, setIsSubmit] = useState(false);
 
-  const [state, handleSubmit, reset] = useForm('movjpepz');
+  const form = useRef<HTMLFormElement>(null);
 
-  if (state.submitting) {
-    return (
-      <div className="d-flex justify-content-center align-items-center min-vh-100">
-        <h2>Submitting Form...</h2>
-      </div>
-    );
-  }
+  const sendEmail = (e) => {
+    e.preventDefault();
 
-  if (state.succeeded) {
-    reset();
-    setName('');
-    setEmail('');
-    setSubject('');
-    setMessage('');
-    alert('Inquiry submitted, I will get back to you promptly.');
-  }
+    setIsSubmit(true);
+
+    if (form.current) {
+      emailjs
+        .sendForm(
+          'service_06ke73d',
+          'template_6r0p7el',
+          form.current,
+          'lJY9P08jMAvUPRE8L'
+        )
+        .then(
+          () => {
+            setName('');
+            setEmail('');
+            setSubject('');
+            setMessage('');
+            setIsSubmit(false);
+            alert('Inquiry submitted, I will get back to you promptly.');
+          },
+          (error) => {
+            console.log('FAILED...', error.text);
+            setIsSubmit(false);
+            alert('Form submission failed.');
+          }
+        );
+    } else {
+      setIsSubmit(false);
+      alert('Form submission failed.');
+    }
+  };
 
   return (
     <>
@@ -144,7 +162,8 @@ export default function ContactArea({ subject }: ContactProps) {
                 <form
                   id="contactForm"
                   className="contact-form"
-                  onSubmit={handleSubmit}
+                  ref={form}
+                  onSubmit={sendEmail}
                 >
                   <div className="row">
                     <div className="col-md-6">
@@ -241,9 +260,11 @@ export default function ContactArea({ subject }: ContactProps) {
                           style={{
                             borderRadius: '0.75rem'
                           }}
-                          disabled={state.submitting}
+                          disabled={isSubmit}
                         >
-                          Send Message <i className="ri-mail-line"></i>
+                          {isSubmit ? 'Submitting...' : 'Send Message'}
+
+                          <i className="ri-mail-line"></i>
                         </button>
                         <div
                           id="msgSubmit"

@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@formspree/react": "^2.5.1",
     "@uiw/react-md-editor": "^4.0.5",
     "@vercel/analytics": "^1.5.0",

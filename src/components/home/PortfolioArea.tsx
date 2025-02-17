@@ -10,8 +10,18 @@ export default function PortfolioArea() {
     refreshInterval: 5000
   });
 
-  if (error) return <div>Failed to load</div>;
-  if (!data) return <div>Loading...</div>;
+  if (error)
+    return (
+      <div className="d-flex justify-content-center align-items-center min-vh-100">
+        <h2>Failed to load projects</h2>
+      </div>
+    );
+  if (!data)
+    return (
+      <div className="d-flex justify-content-center align-items-center min-vh-100">
+        <h2>Loading...</h2>
+      </div>
+    );
 
   const latestProjects = [...data]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
