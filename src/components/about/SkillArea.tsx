@@ -9,7 +9,12 @@ export default function SkillArea() {
           <div className="container-inner">
             <div className="row">
               <div className="col-xl-12 col-lg-12">
-                <div className="section-title section-black-title mb-40 wow fadeInUp delay-0-2s">
+                <div
+                  className="section-title section-white-title wow fadeInUp delay-0-2s"
+                  style={{
+                    marginBottom: '0'
+                  }}
+                >
                   <h2>Tech Stack</h2>
                 </div>
               </div>

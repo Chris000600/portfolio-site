@@ -1350,7 +1350,6 @@ html {
 * ----------------------------------------------------------------------------------------
 */
 .about-area {
-  padding-top: 100px;
   padding-bottom: 100px;
 }
 
@@ -1685,8 +1684,8 @@ ul.extra-skills li i {
 * ----------------------------------------------------------------------------------------
 */
 .resume-area {
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   background: var(--primary-color);
 }
 
@@ -1782,8 +1781,9 @@ ul.extra-skills li i {
 }
 
 .skill-area {
-  padding-top: 120px;
-  background: var(--primary-color);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: var(--black-color);
 }
 
 .skill-item {
@@ -1848,7 +1848,7 @@ ul.extra-skills li i {
 */
 .projects-area {
   padding-top: 100px;
-  padding-bottom: 100px;
+  padding-bottom: 50px;
 }
 
 .filter ul {

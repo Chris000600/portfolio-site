@@ -3,19 +3,15 @@
 ## Functionality
 
 - Proper contact feature
-- Static images
+- services redirect to contact form
 
-  - CRUD projects : blocker: identify projects
-
-    - updateform: image update
-    - tech input
-
-  - CRUD companies (postponed)
-  - CRUD recommendations (postponed)
-  - CRUD services (postponed)
-  - CRUD blog (disabled)
-
+- populate with the right projects
 - fix mobile reactivity
+
+- CRUD companies (postponed)
+- CRUD recommendations (postponed)
+- CRUD services (postponed)
+- CRUD blog (disabled)
 
 ## Pages
 

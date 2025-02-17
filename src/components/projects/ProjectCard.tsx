@@ -1,30 +1,30 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
-const ProjectCard = ({ index, item }) => {
+const ProjectCard = ({ index, project }) => {
   return (
     <div
       key={index}
       className="col-md-6 portfolio-item category-1"
     >
       <Link
-        href={`/projects/${item.title}`}
+        href={`/projects/${project.title}`}
         style={{ cursor: 'pointer' }}
         className="work-popup"
       >
         <div className="portfolio-box">
-          <Image
-            src={item.image}
+          <img
+            src={project.thumbnail}
             alt=""
             style={{
               height: '40vh',
               objectFit: 'cover'
             }}
-            data-rjs="2"
           />
-          <span className="portfolio-category">{item.category}</span>
+          <span className="portfolio-category">
+            {project.technology.split(',').map((tech) => tech.trim())[0]}
+          </span>
           <div className="portfolio-caption">
-            <h1>{item.title}</h1>
+            <h1>{project.title}</h1>
           </div>
         </div>
       </Link>

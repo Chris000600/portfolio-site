@@ -2,7 +2,7 @@ export default function ResumeArea() {
   return (
     <>
       <div
-        className="resume-area no-padding"
+        className="resume-area "
         id="resume"
       >
         <div className="container">

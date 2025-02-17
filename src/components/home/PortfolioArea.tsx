@@ -1,60 +1,26 @@
-import Image, { StaticImageData } from 'next/image';
+'use client';
+
+import useSWR from 'swr';
 import Link from 'next/link';
 
-import portfolio_img_1 from '@/assets/images/projects/img1.png';
-import portfolio_img_2 from '@/assets/images/projects/img2.png';
-import portfolio_img_3 from '@/assets/images/projects/img3.png';
-import portfolio_img_4 from '@/assets/images/projects/img4.png';
-import portfolio_img_5 from '@/assets/images/projects/img5.png';
-
-interface DataType {
-  id: number;
-  col: string;
-  image: StaticImageData;
-  title: string;
-  category: string;
-}
-
-// TODO
-const portfolio_data: DataType[] = [
-  {
-    id: 1,
-    col: '6',
-    image: portfolio_img_1,
-    title: 'Glasses of Cocktail',
-    category: 'Branding'
-  },
-  {
-    id: 2,
-    col: '6',
-    image: portfolio_img_2,
-    title: 'A Branch with Flowers',
-    category: 'Mockup'
-  },
-  {
-    id: 3,
-    col: '4',
-    image: portfolio_img_3,
-    title: 'Orange Rose Flower',
-    category: 'Video'
-  },
-  {
-    id: 4,
-    col: '4',
-    image: portfolio_img_4,
-    title: 'Green Plant on a Desk',
-    category: 'Branding'
-  },
-  {
-    id: 5,
-    col: '4',
-    image: portfolio_img_5,
-    title: 'Orange Rose Flower',
-    category: 'Mockup'
-  }
-];
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function PortfolioArea() {
+  const { data, error } = useSWR('/api/projects', fetcher, {
+    refreshInterval: 5000
+  });
+
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
+
+  const latestProjects = [...data]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 4);
+
+  return <PortfolioGrid projects={latestProjects} />;
+}
+
+function PortfolioGrid({ projects }) {
   return (
     <>
       <div
@@ -69,29 +35,34 @@ export default function PortfolioArea() {
         </div>
         <div className="container-fluid">
           <div className="row g-4 portfolio-grid">
-            {portfolio_data.map((item, i) => (
+            {projects.map((project, i) => (
               <div
                 key={i}
-                className={`col-md-6 col-xl-${item.col} portfolio-item category-1`}
+                className={`col-md-6 portfolio-item category-1`}
               >
                 <Link
-                  href={`/projects/${item.title}`}
+                  href={`/projects/${project._id.toString()}`}
                   style={{ cursor: 'pointer' }}
                   className="work-popup"
                 >
                   <div className="portfolio-box">
-                    <Image
-                      src={item.image}
+                    <img
+                      src={project.thumbnail}
                       alt=""
                       style={{
                         height: '40vh',
                         objectFit: 'cover'
                       }}
-                      data-rjs="2"
                     />
-                    <span className="portfolio-category">{item.category}</span>
+                    <span className="portfolio-category">
+                      {
+                        project.technology
+                          .split(',')
+                          .map((tech) => tech.trim())[0]
+                      }
+                    </span>
                     <div className="portfolio-caption">
-                      <h1>{item.title}</h1>
+                      <h1>{project.title}</h1>
                     </div>
                   </div>
                 </Link>
@@ -99,6 +70,32 @@ export default function PortfolioArea() {
             ))}
           </div>
         </div>
+        <div
+          className="text-center"
+          style={{
+            marginTop: '30px'
+          }}
+        >
+          <Link
+            legacyBehavior
+            href="/projects"
+          >
+            <a className="see-more-link">See More</a>
+          </Link>
+        </div>
+        <style jsx>{`
+          .see-more-link {
+            color: white;
+            font-size: 40px;
+            line-height: 70px;
+            text-transform: uppercase;
+            font-family: Oswald;
+          }
+          .see-more-link:hover {
+            color: #ddd;
+            text-decoration: underline;
+          }
+        `}</style>
       </div>
     </>
   );
