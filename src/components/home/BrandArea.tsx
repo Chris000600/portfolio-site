@@ -1,7 +1,23 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function BrandArea() {
+  const [scrollSpeed, setScrollSpeed] = useState('slow');
+
+  useEffect(() => {
+    const updateSpeed = () => {
+      if (window.innerWidth < 768) {
+        setScrollSpeed('fast');
+      } else {
+        setScrollSpeed('slow');
+      }
+    };
+
+    updateSpeed();
+    window.addEventListener('resize', updateSpeed);
+    return () => window.removeEventListener('resize', updateSpeed);
+  }, []);
+
   useEffect(() => {
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       addAnimation();
@@ -34,7 +50,7 @@ export default function BrandArea() {
                 <div
                   className="scroller"
                   data-direction="left"
-                  data-speed="slow"
+                  data-speed={scrollSpeed}
                 >
                   <div className="scroller__inner align-items-center">
                     <img

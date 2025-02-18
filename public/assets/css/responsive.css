@@ -403,6 +403,10 @@
     padding: 50 27;
   }
 
+  .contact-content-part {
+    margin-top: 30;
+  }
+
   .contact-form-area .form-group .for-icon {
     opacity: 0;
   }
@@ -501,6 +505,10 @@
 
   .single-project-page-right {
     margin-top: 30px;
+  }
+
+  .scroller__inner img {
+    margin-right: 0;
   }
 }
 

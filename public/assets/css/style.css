@@ -2238,7 +2238,7 @@ ul.extra-skills li i {
   background: var(--black-color);
 }
 .contact-form-area {
-  padding: 50px 27px 40px;
+  padding: 50px 27px 20px;
   border-radius: 10px;
   border: 1px solid var(--border-color);
   background: var(--lighter-color);
@@ -3360,7 +3360,7 @@ ul.blog_pagination li a:hover {
 }
 
 .scroller[data-speed='fast'] {
-  --_animation-duration: 20s;
+  --_animation-duration: 30s;
 }
 
 .scroller[data-speed='slow'] {

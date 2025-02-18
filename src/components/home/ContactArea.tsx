@@ -64,99 +64,6 @@ export default function ContactArea({ subject }: ContactProps) {
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-4">
-              <div className=" contact-content-part  wow fadeInUp delay-0-2s">
-                <div
-                  className="single-contact wow fadeInUp"
-                  data-wow-delay=".2s"
-                >
-                  <span className="circle-btn">
-                    <i className="ri-map-pin-line"></i>
-                  </span>
-                  <h2>Location:</h2>
-                  <p>Jakarta, Indonesia</p>
-                </div>
-
-                <div
-                  className="single-contact wow fadeInUp"
-                  data-wow-delay=".4s"
-                >
-                  <span className="circle-btn">
-                    <i className="ri-headphone-line"></i>
-                  </span>
-                  <h2>contact number:</h2>
-                  <a
-                    target="_blank"
-                    href="https://wa.me/+6282113229245"
-                  >
-                    <p>(+62) 821-1322-9245</p>
-                  </a>
-                </div>
-
-                <div
-                  className="single-contact wow fadeInUp"
-                  data-wow-delay=".6s"
-                >
-                  <span className="circle-btn">
-                    <i className="ri-mail-line"></i>
-                  </span>
-                  <h2>Email me:</h2>
-                  <p>chrisw6920@gmail.com</p>
-                </div>
-
-                <div
-                  className="single-contact wow fadeInUp"
-                  data-wow-delay=".6s"
-                >
-                  <h2>Socials</h2>
-                  <div className="about-social">
-                    <ul>
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://wa.me/+6282113229245"
-                        >
-                          <i className="ri-whatsapp-line"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://www.linkedin.com/in/christopherwilliam00/"
-                        >
-                          <i className="ri-linkedin-fill"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://github.com/Chris000600"
-                        >
-                          <i className="ri-github-fill"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://www.facebook.com/chris.will.00/"
-                        >
-                          <i className="ri-facebook-circle-fill"></i>
-                        </a>
-                      </li>
-                      {/* <li>
-                        <a
-                          target="_blank"
-                          href="https://www.instagram.com/"
-                        >
-                          <i className="ri-instagram-line"></i>
-                        </a>
-                      </li> */}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <div className="col-lg-8">
               <div className="contact-form contact-form-area wow fadeInUp delay-0-4s">
                 <form
@@ -277,6 +184,98 @@ export default function ContactArea({ subject }: ContactProps) {
                     </div>
                   </div>
                 </form>
+              </div>
+            </div>
+            <div className="col-lg-4">
+              <div className=" contact-content-part  wow fadeInUp delay-0-2s">
+                <div
+                  className="single-contact wow fadeInUp"
+                  data-wow-delay=".2s"
+                >
+                  <span className="circle-btn">
+                    <i className="ri-map-pin-line"></i>
+                  </span>
+                  <h2>Location:</h2>
+                  <p>Jakarta, Indonesia</p>
+                </div>
+
+                <div
+                  className="single-contact wow fadeInUp"
+                  data-wow-delay=".4s"
+                >
+                  <span className="circle-btn">
+                    <i className="ri-headphone-line"></i>
+                  </span>
+                  <h2>contact number:</h2>
+                  <a
+                    target="_blank"
+                    href="https://wa.me/+6282113229245"
+                  >
+                    <p>(+62) 821-1322-9245</p>
+                  </a>
+                </div>
+
+                <div
+                  className="single-contact wow fadeInUp"
+                  data-wow-delay=".6s"
+                >
+                  <span className="circle-btn">
+                    <i className="ri-mail-line"></i>
+                  </span>
+                  <h2>Email me:</h2>
+                  <p>chrisw6920@gmail.com</p>
+                </div>
+
+                <div
+                  className="single-contact wow fadeInUp"
+                  data-wow-delay=".6s"
+                >
+                  <h2>Socials</h2>
+                  <div className="about-social">
+                    <ul>
+                      <li>
+                        <a
+                          target="_blank"
+                          href="https://wa.me/+6282113229245"
+                        >
+                          <i className="ri-whatsapp-line"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          target="_blank"
+                          href="https://www.linkedin.com/in/christopherwilliam00/"
+                        >
+                          <i className="ri-linkedin-fill"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          target="_blank"
+                          href="https://github.com/Chris000600"
+                        >
+                          <i className="ri-github-fill"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          target="_blank"
+                          href="https://www.facebook.com/chris.will.00/"
+                        >
+                          <i className="ri-facebook-circle-fill"></i>
+                        </a>
+                      </li>
+                      {/* <li>
+                        <a
+                          target="_blank"
+                          href="https://www.instagram.com/"
+                        >
+                          <i className="ri-instagram-line"></i>
+                        </a>
+                      </li> */}
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
