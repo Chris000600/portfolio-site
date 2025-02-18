@@ -1443,7 +1443,7 @@ html {
   font-size: 20px;
   border: 1px solid rgba(0, 0, 0, 0.05);
   padding: 10px 14px;
-  border-radius: 3pz;
+  border-radius: 0.5rem;
 }
 
 .about-image-part .dot-shape {

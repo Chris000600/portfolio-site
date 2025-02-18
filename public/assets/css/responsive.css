@@ -236,8 +236,13 @@
     padding-left: 0px;
   }
 
+  .single-page-hero-area {
+    padding-left: 15;
+    padding-right: 15;
+  }
+
   .single-page-hero-area h2 {
-    font-size: 90px;
+    font-size: calc(20px + 13vw);
   }
 
   .blog-post-caption {
@@ -246,12 +251,11 @@
   }
 
   .main-footer {
-    padding: 50px 0px;
+    padding: 50px 15px;
   }
 
   .about-content-part {
-    padding-left: 0px;
-    padding-right: 0;
+    padding: 0 30px;
   }
 
   h2.about-pre-title {
@@ -281,11 +285,16 @@
   }
 
   p.copy-right-text {
-    text-align-last: center;
+    margin: 0 calc(5px + 1vw) 0;
+    padding: 0;
+  }
+
+  .progress-wrap.active-progress {
+    margin-right: 10px;
   }
 
   .footer-top h2 {
-    font-size: 120px;
+    font-size: calc(20px + 20vw);
     line-height: 1em;
   }
 
@@ -303,7 +312,11 @@
   }
 
   .container-inner {
-    padding: 70px 25px;
+    padding: 0 15;
+  }
+
+  .skill-item h5 {
+    font-size: calc(3px + 3vw);
   }
 
   .about-content-part h2 {
@@ -314,7 +327,7 @@
   }
 
   .section-title h2 {
-    font-size: 50px;
+    font-size: 38px;
     line-height: 60px;
   }
 
@@ -330,19 +343,25 @@
 
   .main-hero-area {
     padding-top: 110px;
+    padding-bottom: 20px;
   }
 
   .about-area {
     padding-top: 0px;
+    padding-bottom: 50px;
   }
 
   .about-content-part p {
-    font-size: 24px;
+    font-size: 20px;
     line-height: 1.4em;
   }
 
   .resume-area {
-    padding-top: 50px;
+    padding: 50 15;
+  }
+
+  .resume-wrapper {
+    margin-top: 24px;
   }
 
   .skill-area {
@@ -350,18 +369,15 @@
   }
 
   .services-area {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding: 50px 15px;
   }
 
   .testimonials-area {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding: 50 15;
   }
 
   .projects-area {
-    padding-top: 50px;
-    padding-bottom: 80px;
+    padding: 50 15;
   }
 
   .client-logo-area {
@@ -374,8 +390,21 @@
   }
 
   .contact-area {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding: 50 15;
+  }
+
+  .contact-form-area,
+  .contact-content-part {
+    padding: 50 27;
+  }
+
+  .contact-form-area .form-group .for-icon {
+    opacity: 0;
+  }
+
+  .about-social ul li {
+    display: inline-block;
+    margin-right: calc(5px + 1vw);
   }
 
   .blog-area {
@@ -405,13 +434,13 @@
   }
 
   .hero-content {
-    padding: 0px 10px;
+    padding: 0px 10px 15px;
     text-align: center;
   }
 
   .clienti-reviews {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 
   .clienti-reviews .clienti-profile {
@@ -423,11 +452,12 @@
   }
 
   .hero-content h2 {
-    font-size: 70px;
+    font-size: calc(20px + 10vw);
   }
 
   .hero-image img {
     margin-top: 0;
+    width: 200px;
   }
 
   .hero-content .dot-shape {
@@ -450,6 +480,22 @@
 
   .hero-counter-area .counter-title {
     font-size: 14px;
+  }
+
+  .company-design-area {
+    padding: 50px 0 40px;
+  }
+
+  .counter-item {
+    margin-bottom: 20px;
+  }
+
+  .single-project-page-design {
+    padding: 0 15px;
+  }
+
+  .single-project-page-right {
+    margin-top: 30px;
   }
 }
 

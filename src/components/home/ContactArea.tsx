@@ -199,7 +199,7 @@ export default function ContactArea({ subject }: ContactProps) {
                           className="form-control"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          placeholder="hello@websitename.com"
+                          placeholder="john.doe@web.com"
                           required
                           data-error="Please enter your Email"
                         />
@@ -226,12 +226,6 @@ export default function ContactArea({ subject }: ContactProps) {
                           required
                           data-error="Please enter your Subject"
                         />
-                        <label
-                          htmlFor="subject"
-                          className="for-icon"
-                        >
-                          <i className="far fa-user"></i>
-                        </label>
                         <div className="help-block with-errors"></div>
                       </div>
                     </div>

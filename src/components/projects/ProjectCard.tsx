@@ -7,7 +7,7 @@ const ProjectCard = ({ index, project }) => {
       className="col-md-6 portfolio-item category-1"
     >
       <Link
-        href={`/projects/${project.title}`}
+        href={`/projects/${project._id}`}
         style={{ cursor: 'pointer' }}
         className="work-popup"
       >

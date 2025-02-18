@@ -16,7 +16,7 @@ export default function FooterOne() {
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-6 col-sm-6">
+            <div className="col-lg-6 col-6">
               <div>
                 <ul className="d-flex flex-row align-items-center list-unstyled">
                   <li className="mx-2">
@@ -59,7 +59,7 @@ export default function FooterOne() {
                 </ul>
               </div>
             </div>
-            <div className="col-lg-6 col-sm-6">
+            <div className="col-lg-6 col-6">
               <p className="copy-right-text">
                 {' '}
                 © Copyright {new Date().getFullYear()}

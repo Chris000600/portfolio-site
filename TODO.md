@@ -2,8 +2,8 @@
 
 ## Functionality
 
-- populate with the right projects
 - fix mobile reactivity
+- populate with the right projects
 
 - CRUD companies (postponed)
 - CRUD recommendations (postponed)

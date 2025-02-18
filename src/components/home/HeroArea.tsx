@@ -69,6 +69,9 @@ export default function HeroArea() {
                 <Link
                   href={'/contact'}
                   className="theme-btn"
+                  style={{
+                    borderRadius: '0.75rem'
+                  }}
                 >
                   Get In touch
                 </Link>
