@@ -6,35 +6,29 @@ import Wrapper from '@/layouts/Wrapper';
 import SingleProjectArea from '@/components/projects/single-project/SingleProjectArea';
 import { getProjectById } from '@/lib/projects';
 
-// TODO
-export const metadata: Metadata = {
-  title: '',
-  description: ''
+type Props = {
+  params: Promise<{ id: string }>;
 };
 
-// type Props = {
-//   params: { projectId: string };
-// };
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const response = await getProjectById(id);
+  const project = JSON.parse(response);
 
-// export async function generateMetadata({ params }: Props): Promise<Metadata> {
-//   const project = await getProjectById(params.projectId);
+  if (!project) {
+    return {
+      title: 'Project Not Found',
+      description: 'The requested project does not exist.'
+    };
+  }
 
-//   if (!project) {
-//     return {
-//       title: 'Project Not Found',
-//       description: 'The requested project does not exist.'
-//     };
-//   }
+  return {
+    title: `Project Details – ${project.title}`,
+    description: `In-depth look at ${project.title}, detailing the challenges faced, solutions implemented, and the results achieved.`
+  };
+}
 
-//   return {
-//     title: `Project Details – ${project.name}`,
-//     description: `In-depth look at ${project.name}, detailing the challenges faced, solutions implemented, and the results achieved.`
-//   };
-// }
-
-// export default function ProjectPage({ params }: Props) {
-
-export default async function ProjectDetailsPage({ params }) {
+export default async function ProjectDetailsPage({ params }: Props) {
   const { id } = await params;
   const response = await getProjectById(id);
   const project = JSON.parse(response);
