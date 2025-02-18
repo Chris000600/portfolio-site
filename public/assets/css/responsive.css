@@ -228,6 +228,11 @@
 /* Mobile Layout: 320px. */
 
 @media only screen and (max-width: 767px) {
+  #magic-cursor,
+  #ball {
+    opacity: 0 !important;
+  }
+
   body {
     overflow-x: hidden;
   }
