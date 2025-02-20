@@ -1,5 +1,4 @@
 import Breadcrumb from '@/components/common/Breadcrumb';
-import PortfolioArea from '@/components/home/PortfolioArea';
 import ProjectGrid from '@/components/projects/ProjectGrid';
 import FooterOne from '@/layouts/footers/FooterOne';
 import HeaderOne from '@/layouts/headers/HeaderOne';

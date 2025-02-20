@@ -39,7 +39,20 @@ export default async function ProjectDetailsPage({ params }: Props) {
       <div id="smooth-wrapper">
         <div id="smooth-content">
           <main>
-            <Breadcrumb title={project.title} />
+            <section
+              className="single-page-hero-area"
+              style={{ maxHeight: '100vh', overflow: 'hidden' }}
+            >
+              <div className="container">
+                <div className="row align-items-center">
+                  <div className="col-lg-12">
+                    <h2 style={{ fontSize: 'clamp(1.5rem, 20vw, 7rem)' }}>
+                      {project.title}
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            </section>
             <SingleProjectArea project={project} />
           </main>
           <FooterOne />

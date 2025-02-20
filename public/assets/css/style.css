@@ -1987,7 +1987,12 @@ ul.extra-skills li i {
   filter: blur(1.5px);
 }
 
-.portfolio-box:hover .portfolio-caption {
+.portfolio-box .gradient-overlay {
+  visibility: visible;
+  opacity: 1 !important;
+}
+
+.portfolio-box .portfolio-caption {
   visibility: visible;
   opacity: 1;
   -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
@@ -2034,6 +2039,15 @@ ul.extra-skills li i {
 .single-project-item {
   padding: 30px;
   border: 1px solid var(--border-color);
+}
+
+.prose h1,
+.prose h2 {
+  margin-bottom: 20px;
+}
+
+.prose h1 {
+  font-size: 50px;
 }
 
 /*

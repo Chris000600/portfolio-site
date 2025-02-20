@@ -12,7 +12,6 @@ export default function Breadcrumb({
       <section className="single-page-hero-area">
         <div className="container">
           <div className="row align-items-center">
-            {/* TODO */}
             <div className="col-lg-12">
               <h2>{title}</h2>
               {style_2 && (

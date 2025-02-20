@@ -21,7 +21,7 @@
 
   .single-service-information-wrap .title {
     font-size: 30px;
-    padding-bottom: 0px;
+    padding-bottom: 20;
   }
 
   .project-item.style-two .project-content h3 {
@@ -38,7 +38,7 @@
   }
 
   .blog_sidebar__wrapper {
-    padding-left: 0px;
+    padding-left: 20;
   }
 
   .about-content-part h2 {
@@ -51,7 +51,7 @@
   }
 
   .about-area {
-    padding-top: 0px;
+    padding-top: 20;
   }
 
   .resume-area {
@@ -150,7 +150,7 @@
   }
 
   .main-footer {
-    padding: 50px 0px;
+    padding: 50px 20;
   }
 
   .about-counter-part::before {
@@ -181,7 +181,7 @@
   }
 
   .single-service-information-wrap {
-    margin-left: 0px;
+    margin-left: 20;
   }
 
   .resume-item .content h4 {
@@ -190,7 +190,7 @@
   }
 
   .single-page-hero-area p {
-    padding: 0px 100px;
+    padding: 20 100px;
   }
 
   .hero-image img {
@@ -198,7 +198,7 @@
   }
 
   .hero-content {
-    padding: 0px 10px;
+    padding: 20 10px;
     text-align: center;
   }
 
@@ -212,7 +212,7 @@
   }
 
   .clienti-reviews .reviews p {
-    margin-top: 0px;
+    margin-top: 20;
   }
 
   .footer-top {
@@ -238,7 +238,7 @@
   }
 
   .blog_sidebar__wrapper {
-    padding-left: 0px;
+    padding-left: 20;
   }
 
   .single-page-hero-area {
@@ -247,7 +247,15 @@
   }
 
   .single-page-hero-area h2 {
-    font-size: calc(20px + 13vw);
+    font-size: clamp(0.5rem, 18vw, 4rem) !important;
+  }
+
+  .prose h1 {
+    font-size: 32px;
+  }
+
+  .single-project-page-left {
+    margin-top: 20px;
   }
 
   .blog-post-caption {
@@ -277,7 +285,7 @@
   }
 
   .single-page-hero-area p {
-    padding: 0px 30px;
+    padding: 20 30px;
   }
 
   .section-title {
@@ -339,11 +347,11 @@
   .hero-content .job {
     display: inline-block;
     padding: 12px 30px;
-    margin-top: 0px;
+    margin-top: 20;
   }
 
   .header-inner {
-    padding: 20px 0px;
+    padding: 20px 20;
   }
 
   .main-hero-area {
@@ -352,7 +360,7 @@
   }
 
   .about-area {
-    padding-top: 0px;
+    padding-top: 20;
     padding-bottom: 50px;
   }
 
@@ -443,7 +451,7 @@
   }
 
   .hero-content {
-    padding: 0px 10px 15px;
+    padding: 20 10px 15px;
     text-align: center;
   }
 
@@ -457,7 +465,7 @@
   }
 
   .clienti-reviews .reviews p {
-    margin-top: 0px;
+    margin-top: 20;
   }
 
   .hero-content h2 {
@@ -509,6 +517,18 @@
 
   .scroller__inner img {
     margin-right: 0;
+  }
+
+  .portfolio-box .gradient-overlay {
+    visibility: visible;
+    opacity: 1 !important;
+  }
+
+  .portfolio-box .portfolio-caption {
+    visibility: visible;
+    opacity: 1;
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
+    margin-bottom: 0;
   }
 }
 
@@ -1089,7 +1109,7 @@
   }
 
   .main-menu .navbar-collapse li .megamenu .row {
-    margin: 0px;
+    margin: 20;
   }
 }
 

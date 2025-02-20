@@ -1,9 +1,5 @@
 'use client';
-import { useState } from 'react';
-import img_1 from '@/assets/images/projects/img1.png';
-import img_2 from '@/assets/images/projects/img2.png';
-import img_3 from '@/assets/images/projects/img3.png';
-import img_4 from '@/assets/images/projects/img4.png';
+import { useEffect, useState } from 'react';
 import markdownit from 'markdown-it';
 import ImagePopup from '@/modals/ImagePopup';
 import Project from '@/types/project';
@@ -13,6 +9,15 @@ const md = markdownit();
 
 export default function SingleProjectArea({ project }: { project: Project }) {
   const parsedContent = md.render(project?.description || '');
+
+  // Track window width to check if mobile
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkScreenSize = () => setIsMobile(window.innerWidth <= 767);
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   const [photoIndex, setPhotoIndex] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -31,50 +36,88 @@ export default function SingleProjectArea({ project }: { project: Project }) {
     <>
       <div className="single-project-page-design">
         <div className="container pt-60 pb-40">
-          <div className="row">
-            <div className="col-lg-4">
-              <div className="single-project-page-left wow fadeInUp delay-0-2s">
-                <div className="single-info">
-                  <p>Date</p>
-                  <h3>{project.date}</h3>
+          {isMobile ? (
+            <div className="row">
+              <div className="col-lg-8">
+                <div className="single-project-page-right wow fadeInUp delay-0-4s">
+                  {parsedContent ? (
+                    <article
+                      className="prose max-w-4xl font-work-sans break-all"
+                      dangerouslySetInnerHTML={{ __html: parsedContent }}
+                    />
+                  ) : (
+                    <p className="no-result">No details provided</p>
+                  )}
                 </div>
-                <div className="single-info">
-                  <p>Tech</p>
-                  <h3>{project.technology}</h3>
-                </div>
-                {project.link && (
-                  <div className="single-info ">
-                    <p>Link</p>
-                    <Link
-                      href={project.link}
-                      target="_blank"
-                    >
-                      <h3>Visit Live Link</h3>
-                    </Link>
+              </div>
+              <div className="col-lg-4">
+                <div className="single-project-page-left wow fadeInUp delay-0-2s">
+                  <div className="single-info">
+                    <p>Date</p>
+                    <h3>{project.date}</h3>
                   </div>
-                )}
+                  <div className="single-info">
+                    <p>Tech</p>
+                    <h3>{project.technology}</h3>
+                  </div>
+                  {project.link && (
+                    <div className="single-info ">
+                      <p>Link</p>
+                      <Link
+                        href={project.link}
+                        target="_blank"
+                      >
+                        <h3>Visit Live Link</h3>
+                      </Link>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-
-            <div className="col-lg-8">
-              <div className="single-project-page-right wow fadeInUp delay-0-4s">
-                <h2>Description</h2>
-                {parsedContent ? (
-                  <article
-                    className="prose max-w-4xl font-work-sans break-all"
-                    dangerouslySetInnerHTML={{ __html: parsedContent }}
-                  />
-                ) : (
-                  <p className="no-result">No details provided</p>
-                )}
+          ) : (
+            <div className="row">
+              <div className="col-lg-4">
+                <div className="single-project-page-left wow fadeInUp delay-0-2s">
+                  <div className="single-info">
+                    <p>Date</p>
+                    <h3>{project.date}</h3>
+                  </div>
+                  <div className="single-info">
+                    <p>Tech</p>
+                    <h3>{project.technology}</h3>
+                  </div>
+                  {project.link && (
+                    <div className="single-info ">
+                      <p>Link</p>
+                      <Link
+                        href={project.link}
+                        target="_blank"
+                      >
+                        <h3>Visit Live Link</h3>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="col-lg-8">
+                <div className="single-project-page-right wow fadeInUp delay-0-4s">
+                  {parsedContent ? (
+                    <article
+                      className="prose max-w-4xl font-work-sans break-all"
+                      dangerouslySetInnerHTML={{ __html: parsedContent }}
+                    />
+                  ) : (
+                    <p className="no-result">No details provided</p>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           <div className="row pt-60">
             {images.map((image, i) => (
               <div
-                className="col-lg-6"
+                className="col-md-4"
                 key={i}
               >
                 <a
@@ -82,17 +125,42 @@ export default function SingleProjectArea({ project }: { project: Project }) {
                   onClick={() => handleImagePopup(i)}
                   className="work-popup"
                 >
-                  <div className="single-image wow fadeInUp delay-0-2s">
+                  <div
+                    className="portfolio-box single-image wow fadeInUp delay-0-2s"
+                    style={{
+                      position: 'relative',
+                      overflow: 'hidden',
+                      height: '40vh'
+                    }}
+                  >
+                    {/* Blurred background image */}
                     <img
                       src={image}
+                      alt=""
                       style={{
-                        height: '40vh',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
                         width: '100%',
+                        height: '100%',
                         objectFit: 'cover',
-                        border: '2px solid #272727', // Added border style
-                        borderRadius: '1rem'
+                        filter: 'blur(20px)',
+                        transform: 'scale(1.1)',
+                        zIndex: 1
                       }}
-                      alt="gallery"
+                    />
+
+                    {/* Main contained image */}
+                    <img
+                      src={image}
+                      alt=""
+                      style={{
+                        position: 'relative',
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        zIndex: 1
+                      }}
                     />
                   </div>
                 </a>

@@ -1,28 +1,52 @@
+import { getProjects } from '@/lib/projects';
 import Count from '../common/Count';
 
-// TODO
-const counter_data = [
-  {
-    id: 1,
-    title: 'Years Of Coding Experience',
-    count: 10,
-    cls: 'plus'
-  },
-  {
-    id: 2,
-    title: 'Programming Languages',
-    count: 19,
-    cls: ''
-  },
-  {
-    id: 3,
-    title: 'Projects',
-    count: 32,
-    cls: 'plus'
-  }
-];
+// HTML
+// CSS
+// TailwindCSS
+// Typescript
+// Javascript
+// NEXT
+// React
+// React Native
+// SQL
+// GraphQL
+// cypherQL
+// SurrealQL
+// python
+// java
+// C
+// C++
+// C#
+// Rust
+// nodeJS
 
-export default function AboutArea() {
+export default async function AboutArea() {
+  const response = await getProjects();
+  const projects = JSON.parse(response);
+  const projectLength = projects.length;
+
+  const counter_data = [
+    {
+      id: 1,
+      title: 'Years Of Coding Experience',
+      count: 10,
+      cls: 'plus'
+    },
+    {
+      id: 2,
+      title: 'Programming Languages',
+      count: 19,
+      cls: ''
+    },
+    {
+      id: 3,
+      title: 'Completed Projects',
+      count: projectLength,
+      cls: ''
+    }
+  ];
+
   return (
     <>
       <section
@@ -60,10 +84,11 @@ export default function AboutArea() {
                     cutting-edge technology.
                   </p>
                   <p>
-                    Proficient in modern coding languages like TypeScript,
-                    Python, and Rust, I leverage new technologies such as AI
-                    Agents, Next.js, and Tauri to build data-driven solutions
-                    that drive smarter business outcomes."
+                    My proficiency in modern tech stacks like NextJS, React
+                    Native, and Python, combined with the ability to leverage
+                    emerging technologies such as AI Agents, LLMs, HubSpot CRM,
+                    and other recent tools, allows me to develop data-driven
+                    solutions that drive smarter business outcomes.
                   </p>
                 </div>
               </div>
