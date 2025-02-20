@@ -93,7 +93,7 @@ export default function SingleProjectArea({ project }: { project: Project }) {
                     </h3>
                   </div>
                   <div className="single-info">
-                    <p>Tech</p>
+                    <p>Category</p>
                     <h3>{project.technology}</h3>
                   </div>
                   {project.link && (

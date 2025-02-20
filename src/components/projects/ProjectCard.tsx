@@ -8,6 +8,7 @@ const ProjectCard = ({ index, project }) => {
     >
       <Link
         href={`/projects/${project._id}`}
+        target="_blank"
         style={{ cursor: 'pointer', textDecoration: 'none' }}
         className="work-popup"
       >
