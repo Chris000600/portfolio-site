@@ -54,7 +54,12 @@ export default function SingleProjectArea({ project }: { project: Project }) {
                 <div className="single-project-page-left wow fadeInUp delay-0-2s">
                   <div className="single-info">
                     <p>Date</p>
-                    <h3>{project.date}</h3>
+                    <h3>
+                      {new Date(project.date).toLocaleString('default', {
+                        month: 'long',
+                        year: 'numeric'
+                      })}
+                    </h3>
                   </div>
                   <div className="single-info">
                     <p>Tech</p>
@@ -80,7 +85,12 @@ export default function SingleProjectArea({ project }: { project: Project }) {
                 <div className="single-project-page-left wow fadeInUp delay-0-2s">
                   <div className="single-info">
                     <p>Date</p>
-                    <h3>{project.date}</h3>
+                    <h3>
+                      {new Date(project.date).toLocaleString('default', {
+                        month: 'long',
+                        year: 'numeric'
+                      })}
+                    </h3>
                   </div>
                   <div className="single-info">
                     <p>Tech</p>
