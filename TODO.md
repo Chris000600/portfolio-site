@@ -2,9 +2,6 @@
 
 ## Functionality
 
-- fix mobile reactivity
-- populate with the right projects
-
 - CRUD companies (postponed)
 - CRUD recommendations (postponed)
 - CRUD services (postponed)

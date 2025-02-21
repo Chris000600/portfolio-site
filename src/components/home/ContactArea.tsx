@@ -1,6 +1,7 @@
 'use client';
 import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import './ContactAreaHover.css'; // added hover styles
 
 interface ContactProps {
   subject?: string;
@@ -12,14 +13,13 @@ export default function ContactArea({ subject }: ContactProps) {
   const [s, setSubject] = useState(subject ? subject : '');
   const [message, setMessage] = useState('');
   const [isSubmit, setIsSubmit] = useState(false);
+  const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
   const form = useRef<HTMLFormElement>(null);
 
   const sendEmail = (e) => {
     e.preventDefault();
-
     setIsSubmit(true);
-
     if (form.current) {
       emailjs
         .sendForm(
@@ -35,7 +35,7 @@ export default function ContactArea({ subject }: ContactProps) {
             setSubject('');
             setMessage('');
             setIsSubmit(false);
-            alert('Inquiry submitted, I will get back to you promptly.');
+            setSubmissionSuccess(true);
           },
           (error) => {
             console.log('FAILED...', error.text);
@@ -65,126 +65,173 @@ export default function ContactArea({ subject }: ContactProps) {
           </div>
           <div className="row">
             <div className="col-lg-8">
-              <div className="contact-form contact-form-area wow fadeInUp delay-0-4s">
-                <form
-                  id="contactForm"
-                  className="contact-form"
-                  ref={form}
-                  onSubmit={sendEmail}
+              {submissionSuccess ? (
+                <div
+                  className="contact-form contact-form-area wow fadeInUp delay-0-4s"
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    textAlign: 'center',
+                    padding: '50px 0',
+                    height: '100%'
+                  }}
                 >
-                  <div className="row">
-                    <div className="col-md-6">
-                      <div className="form-group">
-                        <label htmlFor="name">Full Name</label>
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          className="form-control"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          placeholder="John Doe"
-                          required
-                          data-error="Please enter your Name"
-                        />
-                        <label
-                          htmlFor="name"
-                          className="for-icon"
-                        >
-                          <i className="far fa-user"></i>
-                        </label>
-                        <div className="help-block with-errors"></div>
-                      </div>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="form-group">
-                        <label htmlFor="email">Email Address</label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          className="form-control"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="john.doe@web.com"
-                          required
-                          data-error="Please enter your Email"
-                        />
-                        <label
-                          htmlFor="email"
-                          className="for-icon"
-                        >
-                          <i className="far fa-envelope"></i>
-                        </label>
-                        <div className="help-block with-errors"></div>
-                      </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="form-group">
-                        <label htmlFor="subject">Subject</label>
-                        <input
-                          type="text"
-                          id="subject"
-                          name="subject"
-                          className="form-control"
-                          value={s}
-                          onChange={(e) => setSubject(e.target.value)}
-                          placeholder="Your Subject"
-                          required
-                          data-error="Please enter your Subject"
-                        />
-                        <div className="help-block with-errors"></div>
-                      </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="form-group">
-                        <label htmlFor="message">Your Message</label>
-                        <textarea
-                          id="message"
-                          name="message"
-                          className="form-control"
-                          rows={4}
-                          value={message}
-                          onChange={(e) => setMessage(e.target.value)}
-                          placeholder="Write Your message"
-                          required
-                          data-error="Please Write your Message"
-                        ></textarea>
-                        <div className="help-block with-errors"></div>
-                      </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="form-group mb-0">
-                        <button
-                          type="submit"
-                          className="theme-btn"
-                          style={{
-                            borderRadius: '0.75rem'
-                          }}
-                          disabled={isSubmit}
-                        >
-                          {isSubmit ? 'Submitting...' : 'Send Message'}
-
-                          <i className="ri-mail-line"></i>
-                        </button>
-                        <div
-                          id="msgSubmit"
-                          className="hidden"
-                        ></div>
-                      </div>
-                    </div>
-                    <div className="col-md-12 text-center">
-                      <p className="input-success">
-                        We have received your mail, We will get back to you
-                        soon!
-                      </p>
-                      <p className="input-error">
-                        Sorry, Message could not send! Please try again.
-                      </p>
-                    </div>
+                  <h1 style={{ color: 'black' }}>Inquiry Submitted</h1>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      border: '4px solid green',
+                      borderRadius: '50%',
+                      margin: '2rem',
+                      height: '100px',
+                      width: '100px'
+                    }}
+                  >
+                    <div style={{ fontSize: '4rem', color: 'green' }}>✓</div>
                   </div>
-                </form>
-              </div>
+                  <button
+                    type="button"
+                    style={{
+                      padding: '0.75rem 1.5rem',
+                      backgroundColor: 'black',
+                      borderRadius: '0.5rem',
+                      color: 'white',
+                      cursor: 'pointer',
+                      fontSize: '1.5rem',
+                      fontFamily: 'Oswald, sans-serif'
+                    }}
+                    className=" hover-effect"
+                    onClick={() => setSubmissionSuccess(false)}
+                  >
+                    Close
+                  </button>
+                </div>
+              ) : (
+                <div className="contact-form contact-form-area wow fadeInUp delay-0-4s">
+                  <form
+                    id="contactForm"
+                    className="contact-form"
+                    ref={form}
+                    onSubmit={sendEmail}
+                  >
+                    <div className="row">
+                      <div className="col-md-6">
+                        <div className="form-group">
+                          <label htmlFor="name">Full Name</label>
+                          <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            className="form-control"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="John Doe"
+                            required
+                            data-error="Please enter your Name"
+                          />
+                          <label
+                            htmlFor="name"
+                            className="for-icon"
+                          >
+                            <i className="far fa-user"></i>
+                          </label>
+                          <div className="help-block with-errors"></div>
+                        </div>
+                      </div>
+                      <div className="col-md-6">
+                        <div className="form-group">
+                          <label htmlFor="email">Email Address</label>
+                          <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            className="form-control"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="john.doe@web.com"
+                            required
+                            data-error="Please enter your Email"
+                          />
+                          <label
+                            htmlFor="email"
+                            className="for-icon"
+                          >
+                            <i className="far fa-envelope"></i>
+                          </label>
+                          <div className="help-block with-errors"></div>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="form-group">
+                          <label htmlFor="subject">Subject</label>
+                          <input
+                            type="text"
+                            id="subject"
+                            name="subject"
+                            className="form-control"
+                            value={s}
+                            onChange={(e) => setSubject(e.target.value)}
+                            placeholder="Your Subject"
+                            required
+                            data-error="Please enter your Subject"
+                          />
+                          <div className="help-block with-errors"></div>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="form-group">
+                          <label htmlFor="message">Your Message</label>
+                          <textarea
+                            id="message"
+                            name="message"
+                            className="form-control"
+                            rows={4}
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            placeholder="Write Your message"
+                            required
+                            data-error="Please Write your Message"
+                          ></textarea>
+                          <div className="help-block with-errors"></div>
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="form-group mb-0">
+                          <button
+                            type="submit"
+                            className="theme-btn" // added hover-effect class
+                            style={{
+                              borderRadius: '0.75rem'
+                            }}
+                            disabled={isSubmit}
+                          >
+                            {isSubmit ? 'Submitting...' : 'Send Message'}
+
+                            <i className="ri-mail-line"></i>
+                          </button>
+                          <div
+                            id="msgSubmit"
+                            className="hidden"
+                          ></div>
+                        </div>
+                      </div>
+                      <div className="col-md-12 text-center">
+                        <p className="input-success">
+                          We have received your mail, We will get back to you
+                          soon!
+                        </p>
+                        <p className="input-error">
+                          Sorry, Message could not send! Please try again.
+                        </p>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              )}
             </div>
             <div className="col-lg-4">
               <div className=" contact-content-part  wow fadeInUp delay-0-2s">

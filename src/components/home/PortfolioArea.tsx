@@ -1,11 +1,33 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 import Link from 'next/link';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function PortfolioArea() {
+  const [divHeight, setDivHeight] = useState('40vh');
+  const [projectsCount, setProjectsCount] = useState(6);
+  const [colClass, setColClass] = useState('col-md-4');
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 767) {
+        setDivHeight('25vh');
+        setProjectsCount(4);
+        setColClass('col-md-6');
+      } else {
+        setDivHeight('40vh');
+        setProjectsCount(6);
+        setColClass('col-md-4');
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const { data, error } = useSWR('/api/projects', fetcher, {
     refreshInterval: 5000
   });
@@ -25,12 +47,18 @@ export default function PortfolioArea() {
 
   const latestProjects = [...data]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 4);
+    .slice(0, projectsCount);
 
-  return <PortfolioGrid projects={latestProjects} />;
+  return (
+    <PortfolioGrid
+      projects={latestProjects}
+      divHeight={divHeight}
+      colClass={colClass}
+    />
+  );
 }
 
-function PortfolioGrid({ projects }) {
+function PortfolioGrid({ projects, divHeight, colClass }) {
   return (
     <>
       <div
@@ -48,7 +76,7 @@ function PortfolioGrid({ projects }) {
             {projects.map((project, i) => (
               <div
                 key={i}
-                className="col-md-6 portfolio-item category-1"
+                className={`${colClass} portfolio-item category-1`}
               >
                 <Link
                   href={`/projects/${project._id}`}
@@ -61,7 +89,7 @@ function PortfolioGrid({ projects }) {
                     style={{
                       position: 'relative',
                       overflow: 'hidden',
-                      height: '40vh'
+                      height: divHeight
                     }}
                   >
                     {/* Blurred background image */}
@@ -168,7 +196,7 @@ function PortfolioGrid({ projects }) {
         <style jsx>{`
           .see-more-link {
             color: white;
-            font-size: 40px;
+            font-size: 30px;
             line-height: 70px;
             text-transform: uppercase;
             font-family: Oswald;

@@ -76,19 +76,17 @@ export default async function AboutArea() {
               <div className="d-flex flex-column h-100">
                 <div className="about-content-part flex-fill wow fadeInUp delay-0-2s">
                   <p>
-                    I’m Chris, a programmer and AI analyst based in Jakarta,
-                    Indonesia, with a B.S. in Computer Science from The
-                    University of Western Australia. I specialize in AI
-                    optimization, business intelligence, and workflow
-                    automation; helping businesses enhance performance with
-                    cutting-edge technology.
+                    I’m Chris, a Jakarta-based AI analyst and programmer with a
+                    B.S. in Computer Science. I specialize in AI optimization,
+                    business intelligence, and workflow automation to help
+                    businesses operate more efficiently.
                   </p>
                   <p>
-                    My proficiency in modern tech stacks like NextJS, React
-                    Native, and Python, combined with the ability to leverage
-                    emerging technologies such as AI Agents, LLMs, HubSpot CRM,
-                    and other recent tools, allows me to develop data-driven
-                    solutions that drive smarter business outcomes.
+                    With expertise in modern tech stacks like Next.js, React
+                    Native, and Python, I also leverage emerging technologies
+                    such as AI Agents, LLMs, and HubSpot CRM. This allows me to
+                    develop data-driven solutions that drive smarter business
+                    decisions.
                   </p>
                 </div>
               </div>
