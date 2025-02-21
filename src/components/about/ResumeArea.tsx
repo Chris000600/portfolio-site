@@ -66,7 +66,7 @@ const evenResumeData = resumeData.filter((_, i) => i % 2 === 0);
 const oddResumeData = resumeData.filter((_, i) => i % 2 !== 0);
 
 export default function ResumeArea() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     function handleResize() {
